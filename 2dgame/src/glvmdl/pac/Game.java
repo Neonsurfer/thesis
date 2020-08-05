@@ -13,7 +13,7 @@ import java.awt.image.BufferStrategy;
 public class Game implements Runnable {
     /*
     pályakészítő
-    gépi játékos velünk/ellenünk
+    gépi jáátékos velünk/ellenünk
     kétféle alma piros/zöld
     ha egymáshoz érünk akkor elvehetjük a másik almáját
     verseny/coop mód
@@ -73,10 +73,7 @@ public class Game implements Runnable {
         leaderboardState = new LeaderboardState(handler); //TODO
         State.setState(gameState);
         
-    }
-    
-    
-    
+    } 
     
     private void tick(){
         keyManager.tick();
