@@ -7,12 +7,14 @@
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/Menu.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Angry.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/Highscore.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/DisplayHighscore.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/statics/StaticEntity.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/Entity.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/EntityManager.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/Handler.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/Launcer.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/display/Display.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/AbstractPanel.java</file>
         </group>
     </open-files>
 </project-private>

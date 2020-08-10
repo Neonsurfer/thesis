@@ -1,6 +1,7 @@
 package glvmdl.pac;
 
 
+import glvmdl.pac.highscore.DisplayHighscore;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.ActionListener;
@@ -30,10 +31,13 @@ public class Menu {
         });
         button1.setBounds(100,100,100,30);
         button1.setVisible(true);
+        
         this.button2 = new JButton("Highscores");
         button2.addActionListener((ActionEvent e) ->{
+            DisplayHighscore disp = new DisplayHighscore();
             
         });
+        
         this.button3 = new JButton("About");
         this.button4 = new JButton("Exit game");
         frame.setLayout(new FlowLayout());
