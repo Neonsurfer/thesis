@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,6 +31,8 @@ import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class DisplayHighscore extends AbstractPanel{
+    private JFrame frame;
+    private String title;
     private JPanel container;
     private final String columns [] = {"Name", "Score", "Date"};
     private JTable table;
@@ -39,6 +42,13 @@ public class DisplayHighscore extends AbstractPanel{
     private JLabel panelTitle;
     
     public DisplayHighscore(){
+        frame = new JFrame(title);
+        frame.setSize(600,400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        
         setShowPanelProperties();
         panelTitle = new JLabel("Highscores", JLabel.LEFT);
         panelTitle.setFont(new Font("Serif", Font.BOLD, 22));
@@ -46,13 +56,15 @@ public class DisplayHighscore extends AbstractPanel{
         container = new JPanel();
         container.setPreferredSize(new Dimension(200, 100));
         container.add(panelTitle);
-        add(container);
+        
+        frame.add(container);
         
         tableModel = new DefaultTableModel(columns, 0);
         setTableProperties(tableModel);
         
         populateTable(highscores);
-        
+        table = new JTable(tableModel);
+        frame.add(table);
     }
     
     @Override
