@@ -39,7 +39,12 @@ public class Menu {
         });
         
         this.button3 = new JButton("About");
+        
         this.button4 = new JButton("Exit game");
+        button4.addActionListener((ActionEvent e) ->{
+            
+            System.exit(0);
+        });
         frame.setLayout(new FlowLayout());
         frame.add(button1);    
         frame.add(button2);
