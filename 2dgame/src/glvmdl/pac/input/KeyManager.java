@@ -7,7 +7,7 @@ import java.util.*;
 public class KeyManager implements KeyListener{
     
     private boolean[] keys;
-    public boolean up, down, left, right, escape, ctrl, b, a;
+    public boolean up, down, left, right, escape, ctrl, b, a, w, s, d;
     public ArrayList <String> pressedKeys = new ArrayList<>();
     
     
@@ -25,6 +25,9 @@ public class KeyManager implements KeyListener{
         ctrl = keys[KeyEvent.VK_CONTROL];
         b = keys[KeyEvent.VK_B];
         a = keys[KeyEvent.VK_A];
+        w = keys[KeyEvent.VK_W];
+        s = keys[KeyEvent.VK_S];
+        d = keys[KeyEvent.VK_D];
     }
 
     @Override

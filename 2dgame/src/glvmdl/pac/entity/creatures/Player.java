@@ -29,7 +29,7 @@ public class Player extends Creature{
         move();
         handler.getGameCamera().centerOnEntity(this); //CAMERA CENTER
         checkHP();
-        checkKeyManager();
+        checkKeyManager(); // for cheat mode activation
     }
     
     private void getInput(){
@@ -58,7 +58,7 @@ public class Player extends Creature{
             handler.getGame().stop();
         }
         if(handler.getKeyManager().ctrl){
-            if(this.handler.getGame().getScore()>=100){
+            if(this.handler.getGame().getScore()>=200 && this.isCheating){
                 this.handler.getGame().setScore(this.handler.getGame().getScore()-100);
                 this.handler.getWorld().getEntityManager().spawnFriendlyBear();
             }

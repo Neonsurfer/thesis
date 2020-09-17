@@ -8,6 +8,7 @@ import glvmdl.pac.entity.creatures.Angry;
 import glvmdl.pac.entity.creatures.Helpful;
 import glvmdl.pac.entity.creatures.Problem;
 import glvmdl.pac.entity.creatures.Smith;
+import glvmdl.pac.entity.creatures.FriendBear;
 import glvmdl.tiles.Tile;
 import glvmdl.pac.world.utils.Utils;
 import java.awt.Graphics;
@@ -23,11 +24,14 @@ public class World {
     
     public World(Handler handler, String path){
         this.handler = handler;
-        entityManager = new EntityManager(handler, new Player(handler, 50, 50), new Angry(handler, 450, 600 ), new Helpful(handler, 450, 550), new Problem(handler, 650,550), new Smith(handler, 650, 600));
+        entityManager = new EntityManager(handler, new Player(handler, 50, 50), new Angry(handler, 450, 600 ),
+                new Helpful(handler, 450, 550), new Problem(handler, 650,550), new Smith(handler, 650, 600),
+                new FriendBear(handler, 50, 50));
         loadWorld(path);
         
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
+        
         
         
     }

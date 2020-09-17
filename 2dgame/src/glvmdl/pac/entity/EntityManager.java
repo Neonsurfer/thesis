@@ -19,9 +19,9 @@ public class EntityManager {
     private Problem problem;
     private Smith smith;
     private FriendBear friendlyBear;
-    private ArrayList<Entity> entities;
+    private static ArrayList<Entity> entities= new ArrayList<Entity>();;
     
-    public EntityManager(Handler handler, Player player, Angry angry, Helpful helpful, Problem problem, Smith smith){
+    public EntityManager(Handler handler, Player player, Angry angry, Helpful helpful, Problem problem, Smith smith, FriendBear friendBear){
         this.handler = handler;
         
         this.player = player;
@@ -29,12 +29,13 @@ public class EntityManager {
         this.helpful = helpful;
         this.problem = problem;
         this.smith = smith;
-        entities = new ArrayList<Entity>();
+        this.friendlyBear = friendBear;
         addEntity(player);
         addEntity(angry);
         addEntity(helpful);
         addEntity(problem);
         addEntity(smith);
+        addEntity(friendBear);
     }
 
     public Angry getAngry() {
@@ -82,7 +83,7 @@ public class EntityManager {
         }
     }
     
-    public void addEntity(Entity e){
+    public static void addEntity(Entity e){
         entities.add(e);
     }
     //GETTERS SETTERS
