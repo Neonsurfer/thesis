@@ -15,10 +15,13 @@
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/gfx/SpriteSheet.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/Game.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/gfx/GameCamera.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/DisplayHighscore.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/states/State.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Astar.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/Launcer.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/gfx/ImageLoader.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Angry.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Problem.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/Highscore.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Creature.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/states/GameState.java</file>
@@ -27,6 +30,7 @@
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/world/utils/Utils.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/tiles/Tile.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Player.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Helpful.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/AbstractPanel.java</file>
         </group>
     </open-files>

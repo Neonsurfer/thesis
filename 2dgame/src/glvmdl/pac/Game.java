@@ -13,12 +13,12 @@ import java.awt.image.BufferStrategy;
 public class Game implements Runnable {
     /*
     pályakészítő
-    gépi jáátékos velünk/ellenünk
+    gépi jáátékos velünk/ellenünk -- done
     kétféle alma piros/zöld
     ha egymáshoz érünk akkor elvehetjük a másik almáját
-    verseny/coop mód
-    több játékosban akkor 2 játékos is játszhat akár
-    Bubu mint gépi játékos
+    verseny/coop mód -- coop
+    több játékosban akkor 2 játékos is játszhat akár -- done
+    Bubu mint gépi játékos -- soon
     követi maci Lacit
     szétrombolhatja a segítő eszközöket vagy ügyes és jobb mint mi
     sövény amit át lehet törni(vagy adott almaszám felett)

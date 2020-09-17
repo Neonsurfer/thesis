@@ -6,7 +6,7 @@ public class Assets {
     
     private static final int width = 50, height = 50;
 
-    public static BufferedImage player, dirt, tree, apple, rock, angry, helpful, problem, smith, basket;
+    public static BufferedImage player, dirt, tree, apple, rock, angry, helpful, problem, smith, basket, friend;
     
     public static void init(){
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/spritesheet.png"));
@@ -21,6 +21,7 @@ public class Assets {
         problem = sheet.crop(width, 2*height, width, height);
         smith = sheet.crop(2*width, 2*height, width, height);
         basket = sheet.crop(0, 3*height, width, height);
+        friend = sheet.crop(width, 3*height,width, height);
         
     }
     
