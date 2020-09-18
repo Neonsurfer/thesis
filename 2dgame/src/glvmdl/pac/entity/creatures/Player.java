@@ -3,6 +3,11 @@ package glvmdl.pac.entity.creatures;
 import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
 import glvmdl.pac.gfx.Assets;
+import glvmdl.pac.highscore.EndgamePanel;
+import glvmdl.pac.highscore.Highscore;
+import static glvmdl.pac.highscore.Highscore.checkCurrentScore;
+import static glvmdl.pac.highscore.Highscore.getCurrentHighscores;
+import static glvmdl.pac.highscore.Highscore.saveHighScores;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.*;
@@ -81,6 +86,10 @@ public class Player extends Creature{
     private void checkHP(){
         if(this.health==0){
             System.out.println("GAME OVER");
+            getCurrentHighscores();
+            EndgamePanel tmp = new EndgamePanel();
+            checkCurrentScore(handler.getGame().getScore(), tmp.getName());
+            saveHighScores();
             handler.getGame().stop();
         }
         
@@ -108,8 +117,8 @@ public class Player extends Creature{
                 this.handler.getGame().getKeyManager().pressedKeys.remove(i);
             }
         }
-        
-        
     }
+    
+    
     
 }

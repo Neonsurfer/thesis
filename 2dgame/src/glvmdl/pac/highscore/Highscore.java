@@ -1,7 +1,8 @@
 
 package glvmdl.pac.highscore;
 
-import glvmdl.pac.input.KeyManager;
+import glvmdl.pac.world.World;
+import glvmdl.pac.Handler;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -13,14 +14,14 @@ public class Highscore {
     private String name;
     private int score;
     private LocalDate date;
-    private KeyManager keyManager;
     public static List <Highscore> highscores = new ArrayList<>();
+ 
     
     public Highscore(String name, int score, LocalDate date){
         this.name = name;
         this.score = score;
         this.date = date;
-        keyManager = new KeyManager();
+  
         
     }
     
@@ -36,11 +37,40 @@ public class Highscore {
         }
     }
     
-    private static void addNewHighScore(String line){
+    public static void addNewHighScore(String line){
         String [] pieces = line.split(";");
         Highscore current = new Highscore(pieces[0], Integer.parseInt(pieces[1]),  LocalDate.parse(pieces[2]));
         highscores.add(current);
     }
+    
+    public static void checkCurrentScore(int score, String name){
+        
+        if(highscores.size()<10){
+            highscores.add(new Highscore(name, score, LocalDate.now()));
+        }else 
+        if(score > highscores.get(highscores.size()).getScore()){
+            for(int i=0;i<highscores.size();i++){
+                if(score > highscores.get(i).getScore()){
+                    highscores.add(i, new Highscore(name, score, LocalDate.now()));
+                }
+            }
+        }
+    }
+    
+    public static void saveHighScores(){
+        try{
+            RandomAccessFile input = new RandomAccessFile("highscores.txt", "rw");
+            input.seek(0);
+            for(Highscore h : highscores){
+                input.writeBytes(h.toString() + "\r\n");
+            }
+            
+        }catch(IOException e){
+            System.out.println("Highscore file not found!");
+        }
+    }
+    
+    
 
     public String getName() {
         return name;
@@ -53,4 +83,11 @@ public class Highscore {
     public LocalDate getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        return name + ";" + score + ";" + date;
+    }
+    
+    
 }
