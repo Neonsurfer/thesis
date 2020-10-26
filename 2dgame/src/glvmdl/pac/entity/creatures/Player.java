@@ -1,20 +1,15 @@
 package glvmdl.pac.entity.creatures;
 
-import glvmdl.pac.Game;
+
 import glvmdl.pac.Handler;
 import glvmdl.pac.gfx.Assets;
 import glvmdl.pac.highscore.EndgamePanel;
-import glvmdl.pac.highscore.Highscore;
-import static glvmdl.pac.highscore.Highscore.checkCurrentScore;
 import static glvmdl.pac.highscore.Highscore.getCurrentHighscores;
-import static glvmdl.pac.highscore.Highscore.saveHighScores;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.*;
 
 public class Player extends Creature{
-    
-    public static int lives = 3;
+
     public boolean isCheating = false;
     
     
@@ -25,6 +20,7 @@ public class Player extends Creature{
         bounds.y = 0;
         bounds.width = 30;
         bounds.height = 30;
+        this.health = 3;
         //TWEAK THIS
     }
     
@@ -60,7 +56,7 @@ public class Player extends Creature{
             this.handler.getGame().getKeyManager().pressedKeys.add("r");
         }
         if(handler.getKeyManager().escape){
-            handler.getGame().stop();
+            handler.getGame().closeGame();
         }
         if(handler.getKeyManager().ctrl){
             if(this.handler.getGame().getScore()>=200 && this.isCheating){
@@ -87,10 +83,10 @@ public class Player extends Creature{
         if(this.health==0){
             System.out.println("GAME OVER");
             getCurrentHighscores();
-            EndgamePanel tmp = new EndgamePanel();
-            checkCurrentScore(handler.getGame().getScore(), tmp.getName());
-            saveHighScores();
-            handler.getGame().stop();
+            EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore());
+            System.out.println("asd");
+            tmp = null;
+            handler.getGame().closeGame();
         }
         
     }
@@ -110,6 +106,7 @@ public class Player extends Creature{
         }
         if(lastPressed.contains("uuddlrlrba")){
             this.isCheating = true;
+            
         }
         
         if(lastPressed.length() > 20){

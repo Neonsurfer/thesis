@@ -15,6 +15,7 @@ public class Menu {
     private JFrame frame;
     private Canvas canvas;
     
+    
     private JButton button1; // Új játék
     private JButton button2; // Top lista
     private JButton button3; // Készítő
@@ -26,11 +27,10 @@ public class Menu {
         
         this.button1 = new JButton("New Game");
         button1.addActionListener((ActionEvent e) -> {
-            Game game = new Game("Tile Game!",800,800);
-            game.start(); 
+            Game game = new Game("Yogi-bear Game!",800,800);
+            game.start();
         });
         button1.setBounds(100,100,100,30);
-        button1.setVisible(true);
         
         this.button2 = new JButton("Highscores");
         button2.addActionListener((ActionEvent e) ->{

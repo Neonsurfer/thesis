@@ -12,11 +12,11 @@ import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
     /*
-    pályakészítő
-    gépi jáátékos velünk/ellenünk -- done
+    legyen 10 pálya
+    gépi játékos velünk/ellenünk -- done
     kétféle alma piros/zöld
     ha egymáshoz érünk akkor elvehetjük a másik almáját
-    verseny/coop mód -- coop
+    coop mód -- coop - done
     több játékosban akkor 2 játékos is játszhat akár -- done
     Bubu mint gépi játékos -- soon
     követi maci Lacit
@@ -24,6 +24,7 @@ public class Game implements Runnable {
     sövény amit át lehet törni(vagy adott almaszám felett)
     lehet így következő pályára menni
     többpálya esetén mentés, betöltés
+    egyéb eszközök esetleg, amik több pontot adnak
     */
     private Display display;
     public String title;
@@ -59,6 +60,7 @@ public class Game implements Runnable {
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
+        
     }
     
     private void init(){
@@ -167,6 +169,10 @@ public class Game implements Runnable {
     
     public void setScore(int score){
         this.score = score;
+    }    
+    
+    public Display getDisplay(){
+        return display;
     }
     
     public synchronized void start(){
@@ -181,11 +187,18 @@ public class Game implements Runnable {
         if(!running)
             return;
         running = false;
-        //try{
         System.out.println(this.score);
         System.exit(0);
-            //thread.join();
-        //}catch(InterruptedException e){e.printStackTrace();}
     }
+    
+    public void closeGame(){
+        handler.getGame().getDisplay().getFrame().setVisible(false);
+        handler.getGame().getDisplay().getFrame().dispose();
+        handler.getWorld().getEntityManager().killAll();
+        handler.setWorld(null);
+        handler.setGame(null);
+        State.setState(null);
+    }
+    
     
 }

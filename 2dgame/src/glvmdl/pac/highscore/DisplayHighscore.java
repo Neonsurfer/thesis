@@ -18,8 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 
-
-
 @SuppressWarnings("serial")
 public class DisplayHighscore extends AbstractPanel{
     private JFrame frame;

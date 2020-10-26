@@ -47,9 +47,13 @@ public class Highscore {
         
         if(highscores.size()<10){
             highscores.add(new Highscore(name, score, LocalDate.now()));
-        }else 
-        if(score > highscores.get(highscores.size()).getScore()){
-            for(int i=0;i<highscores.size();i++){
+        }else{
+            while(highscores.size() > 10){
+                highscores.remove(highscores.size()-1);
+            }
+        } 
+        if(score > highscores.get(highscores.size()-1).getScore()){
+            for(int i=0;i<highscores.size()-1;i++){
                 if(score > highscores.get(i).getScore()){
                     highscores.add(i, new Highscore(name, score, LocalDate.now()));
                 }

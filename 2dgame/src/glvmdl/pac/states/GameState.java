@@ -15,8 +15,7 @@ public class GameState extends State{
         super(handler);
         world = new World(handler, "res/worlds/world1.txt");
         handler.setWorld(world);
-        
-        
+  
     }
 
     @Override

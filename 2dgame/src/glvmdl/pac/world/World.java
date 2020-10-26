@@ -31,9 +31,7 @@ public class World {
         
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        
-        
-        
+        entityManager.getPlayer().setHealth(3);
     }
     
     public void tick(){
@@ -128,5 +126,10 @@ public class World {
     public int getAppleCount(){
         return this.appleCounter;
     }
+    
+    public void killEntities(){
+        this.entityManager.setEntities(null);
+    }
+    
     
 }

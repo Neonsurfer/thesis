@@ -4,6 +4,7 @@ package glvmdl.pac.highscore;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -18,26 +19,41 @@ public class EndgamePanel {
     private JLabel panelTitle;
     private JTextField textField;
     private String name;
+    private int score;
+    public static boolean isShowing = true;
     
-    public EndgamePanel(){
+    public EndgamePanel(int score){
+        this.score = score;
         frame = new JFrame(title);
-        frame.setSize(200,100);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+        
         
         panelTitle = new JLabel("New Highscore!", JLabel.LEFT);
         panelTitle.setFont(new Font("Serif", Font.BOLD, 22));
         
         textField = new JTextField("Enter your name");
         JButton btn = new JButton("Enter!");
-        btn.addActionListener((ActionEvent e) -> {
-            textField.getText();
-        });
         
+        btn.addActionListener((ActionEvent e) -> {
+            Highscore.checkCurrentScore(score, textField.getText());
+            Highscore.saveHighScores();
+            this.frame.dispose();
+            
+        });
+        textField.setVisible(true);
+        
+        
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.add(panelTitle);
         frame.add(textField);
         frame.add(btn);
+        
+        frame.setLayout(new FlowLayout());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setSize(300,150);
+        frame.setVisible(true);
     }
 
     public String getName() {

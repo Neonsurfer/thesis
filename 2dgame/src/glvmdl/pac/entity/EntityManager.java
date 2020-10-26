@@ -125,5 +125,9 @@ public class EntityManager {
         }
     }
     
+    public void killAll(){
+        entities.clear();
+    }
+    
     
 }
