@@ -37,6 +37,8 @@ public class Player extends Creature{
         xMove = 0;
         yMove = 0;
         
+            
+        
         if(handler.getKeyManager().up){
             yMove = -speed;
             this.handler.getGame().getKeyManager().pressedKeys.add("u");
@@ -71,6 +73,9 @@ public class Player extends Creature{
             this.handler.getGame().getKeyManager().pressedKeys.add("a");
         }
         
+            
+        
+        
     }
     
     @Override
@@ -86,6 +91,7 @@ public class Player extends Creature{
             EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore());
             System.out.println("asd");
             tmp = null;
+            handler.getGame().getMenu().resetWorldId();
             handler.getGame().closeGame();
         }
         

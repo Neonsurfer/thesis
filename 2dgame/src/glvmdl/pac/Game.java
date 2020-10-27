@@ -18,8 +18,8 @@ public class Game implements Runnable {
     ha egymáshoz érünk akkor elvehetjük a másik almáját
     coop mód -- coop - done
     több játékosban akkor 2 játékos is játszhat akár -- done
-    Bubu mint gépi játékos -- soon
-    követi maci Lacit
+    Bubu mint gépi játékos -- done
+    követi maci Lacit -- done
     szétrombolhatja a segítő eszközöket vagy ügyes és jobb mint mi
     sövény amit át lehet törni(vagy adott almaszám felett)
     lehet így következő pályára menni
@@ -43,6 +43,7 @@ public class Game implements Runnable {
     public State gameState;
     public State menuState;
     public State leaderboardState;
+    public Menu menu;
     
     //Input
     private KeyManager keyManager;
@@ -52,10 +53,11 @@ public class Game implements Runnable {
     
     //Handler
     private Handler handler;
+    
 
     
 
-    public Game(String title, int width, int height){
+    public Game(Menu menu, String title, int width, int height){
         this.width = width;
         this.height = height;
         this.title = title;
@@ -72,7 +74,7 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(handler,0,0);
         
         
-        gameState = new GameState(handler);
+        gameState = new GameState(handler, menu.worldId);
         leaderboardState = new LeaderboardState(handler); //TODO
         State.setState(gameState);
         
@@ -175,6 +177,11 @@ public class Game implements Runnable {
         return display;
     }
     
+    public Menu getMenu(){
+        return this.menu;
+    }
+    
+    
     public synchronized void start(){
         if(running)
             return;
@@ -199,6 +206,8 @@ public class Game implements Runnable {
         handler.setGame(null);
         State.setState(null);
     }
+    
+    
     
     
 }

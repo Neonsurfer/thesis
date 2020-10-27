@@ -11,9 +11,10 @@ public class GameState extends State{
     private World world;
     
     
-    public GameState(Handler handler){
+    
+    public GameState(Handler handler, int worldId){
         super(handler);
-        world = new World(handler, "res/worlds/world1.txt");
+        world = new World(handler, "res/worlds/world" + worldId + ".txt");
         handler.setWorld(world);
   
     }
@@ -28,5 +29,6 @@ public class GameState extends State{
     public void render(Graphics g){
         world.render(g);
     }
+
     
 }

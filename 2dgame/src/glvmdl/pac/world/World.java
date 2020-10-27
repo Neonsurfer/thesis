@@ -22,8 +22,9 @@ public class World {
     private EntityManager entityManager;
     private static int appleCounter = 100;
     
+    
     public World(Handler handler, String path){
-        this.handler = handler;
+        this.handler = handler; // tweak spawn finder for everyone
         entityManager = new EntityManager(handler, new Player(handler, 50, 50), new Angry(handler, 450, 600 ),
                 new Helpful(handler, 450, 550), new Problem(handler, 650,550), new Smith(handler, 650, 600),
                 new FriendBear(handler, 50, 50));

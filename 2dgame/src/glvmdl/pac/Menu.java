@@ -15,6 +15,7 @@ public class Menu {
     private JFrame frame;
     private Canvas canvas;
     
+    static int worldId = 1;
     
     private JButton button1; // Új játék
     private JButton button2; // Top lista
@@ -27,7 +28,7 @@ public class Menu {
         
         this.button1 = new JButton("New Game");
         button1.addActionListener((ActionEvent e) -> {
-            Game game = new Game("Yogi-bear Game!",800,800);
+            Game game = new Game(this,"Yogi-bear Game!",800,800);
             game.start();
         });
         button1.setBounds(100,100,100,30);
@@ -56,6 +57,13 @@ public class Menu {
         frame.setSize(100,200);
         frame.setVisible(true);
         
+    }
+    public void increaseWorldId(){
+        this.worldId++;
+    }
+    
+    public void resetWorldId(){
+        this.worldId = 1;
     }
   
     

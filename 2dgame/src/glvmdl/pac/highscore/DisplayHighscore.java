@@ -33,7 +33,7 @@ public class DisplayHighscore extends AbstractPanel{
     public DisplayHighscore(){
         frame = new JFrame(title);
         frame.setSize(600,400);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

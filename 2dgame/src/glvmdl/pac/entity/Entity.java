@@ -33,19 +33,26 @@ public abstract class Entity {
     public abstract void render(Graphics g);
     
     public boolean checkEntityCollisions(float xOffset, float yOffset){
+       
         for(Entity e : handler.getWorld().getEntityManager().getEntities()){
             //APPLE
             if(e instanceof Player && e.getCollisionBounds( 0f, 0f).intersects(getCollisionBounds(0f, 0f)) && handler.getWorld().getTile(((int)e.x/40), ((int)e.y/40)).getId() == 3){
                 this.handler.getWorld().setTile((int)(e.x/40), (int)(e.y/40), 0);
                 this.handler.getGame().increaseScore();
-                if(this.alreadyWon())handler.getGame().closeGame();
+                if(this.alreadyWon()){
+                    handler.getGame().getMenu().increaseWorldId();
+                    handler.getGame().closeGame();
+                }
                 System.out.println(this.handler.getGame().getScore());
             }
             //BASKET
             if(e instanceof Player && e.getCollisionBounds( 0f, 0f).intersects(getCollisionBounds(0f, 0f)) && handler.getWorld().getTile(((int)e.x/40), ((int)e.y/40)).getId() == 4){
                 this.handler.getWorld().setTile((int)(e.x/40), (int)(e.y/40), 0);
                 this.handler.getGame().increaseScore();
-                if(this.alreadyWon())handler.getGame().closeGame();
+                if(this.alreadyWon()){
+                    handler.getGame().getMenu().increaseWorldId();
+                    handler.getGame().closeGame();
+                }
                 System.out.println(this.handler.getGame().getScore());
                 resetBots();
             }
@@ -88,6 +95,8 @@ public abstract class Entity {
                 continue;
             
         }
+        
+        
         return false;
     }
     
@@ -145,7 +154,8 @@ public abstract class Entity {
     
     public boolean alreadyWon(){
         if(handler.getWorld().countApples() == 0){
-            System.out.println("Congratulations!");
+            handler.getGame().getMenu().increaseWorldId();
+            handler.getGame().closeGame();
             return true;
         }
         return false;

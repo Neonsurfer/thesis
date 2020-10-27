@@ -26,15 +26,18 @@ public class Highscore {
     }
     
     public static void getCurrentHighscores(){
-        try{
-            RandomAccessFile input = new RandomAccessFile("highscores.txt", "rw");
-            for(String line = input.readLine(); line != null; line = input.readLine()){
-                addNewHighScore(line);
+        if(highscores.size() == 0){
+            try{
+                RandomAccessFile input = new RandomAccessFile("highscores.txt", "rw");
+                for(String line = input.readLine(); line != null; line = input.readLine()){
+                    addNewHighScore(line);
+                }
+                input.close();
+            }catch(IOException e){
+                System.out.println("Highscore file not found!");
             }
-            input.close();
-        }catch(IOException e){
-            System.out.println("Highscore file not found!");
         }
+        
     }
     
     public static void addNewHighScore(String line){
