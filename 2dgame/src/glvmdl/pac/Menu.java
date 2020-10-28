@@ -15,7 +15,7 @@ public class Menu {
     private JFrame frame;
     private Canvas canvas;
     
-    static int worldId = 1;
+    static int worldId;
     
     private JButton button1; // Új játék
     private JButton button2; // Top lista
@@ -24,6 +24,8 @@ public class Menu {
     
     
     public Menu() {
+        worldId = 1;
+        
         JFrame frame = new JFrame("Menu");
         
         this.button1 = new JButton("New Game");
@@ -59,11 +61,11 @@ public class Menu {
         
     }
     public void increaseWorldId(){
-        this.worldId++;
+        worldId++;
     }
     
     public void resetWorldId(){
-        this.worldId = 1;
+        worldId = 1;
     }
   
     

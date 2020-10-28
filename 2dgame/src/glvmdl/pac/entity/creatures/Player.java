@@ -29,8 +29,9 @@ public class Player extends Creature{
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this); //CAMERA CENTER
-        checkHP();
         checkKeyManager(); // for cheat mode activation
+        checkHP();
+        
     }
     
     private void getInput(){
@@ -86,13 +87,16 @@ public class Player extends Creature{
     
     private void checkHP(){
         if(this.health==0){
+            handler.getGame().getMenu().resetWorldId();
             System.out.println("GAME OVER");
             getCurrentHighscores();
             EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore());
             System.out.println("asd");
             tmp = null;
-            handler.getGame().getMenu().resetWorldId();
+
             handler.getGame().closeGame();
+            
+            
         }
         
     }

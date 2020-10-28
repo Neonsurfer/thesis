@@ -62,7 +62,7 @@ public class Game implements Runnable {
         this.height = height;
         this.title = title;
         keyManager = new KeyManager();
-        
+        this.menu = menu;
     }
     
     private void init(){
