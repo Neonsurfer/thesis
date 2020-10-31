@@ -14,8 +14,6 @@ public class Game implements Runnable {
     /*
     legyen 10 pálya
     gépi játékos velünk/ellenünk -- done
-    kétféle alma piros/zöld
-    ha egymáshoz érünk akkor elvehetjük a másik almáját
     coop mód -- coop - done
     több játékosban akkor 2 játékos is játszhat akár -- done
     Bubu mint gépi játékos -- done
@@ -36,7 +34,6 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
     
-    private int score = 0;
     
     //States
     
@@ -74,7 +71,7 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(handler,0,0);
         
         
-        gameState = new GameState(handler, menu.worldId);
+        gameState = new GameState(handler, menu.getWorldId());
         leaderboardState = new LeaderboardState(handler); //TODO
         State.setState(gameState);
         
@@ -117,7 +114,6 @@ public class Game implements Runnable {
         long now;
         long lastTime = System.nanoTime();
         long timer = 0;
-        int ticks = 0;
         
         while(running){
             now = System.nanoTime();
@@ -129,11 +125,9 @@ public class Game implements Runnable {
                 tick();
                 render();
                 delta--;
-                ticks++;
             }
             
             if(timer >=1000000000){
-                ticks = 0;
                 timer = 0;
             }
         }
@@ -162,15 +156,15 @@ public class Game implements Runnable {
     }
     
     public void increaseScore(){
-        this.score++;
+        menu.increaseScore();
     }
     
     public int getScore(){
-        return score;
+        return menu.getScore();
     }
     
     public void setScore(int score){
-        this.score = score;
+        menu.setScore(score);
     }    
     
     public Display getDisplay(){
@@ -194,7 +188,7 @@ public class Game implements Runnable {
         if(!running)
             return;
         running = false;
-        System.out.println(this.score);
+        System.out.println(menu.getScore());
         System.exit(0);
     }
     

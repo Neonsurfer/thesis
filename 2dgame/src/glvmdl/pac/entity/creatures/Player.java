@@ -20,7 +20,7 @@ public class Player extends Creature{
         bounds.y = 0;
         bounds.width = 30;
         bounds.height = 30;
-        this.health = 3;
+        this.health = handler.getGame().getMenu().getLives();
         //TWEAK THIS
     }
     
@@ -29,7 +29,7 @@ public class Player extends Creature{
         getInput();
         move();
         handler.getGameCamera().centerOnEntity(this); //CAMERA CENTER
-        checkKeyManager(); // for cheat mode activation
+
         checkHP();
         
     }
@@ -61,22 +61,6 @@ public class Player extends Creature{
         if(handler.getKeyManager().escape){
             handler.getGame().closeGame();
         }
-        if(handler.getKeyManager().ctrl){
-            if(this.handler.getGame().getScore()>=200 && this.isCheating){
-                this.handler.getGame().setScore(this.handler.getGame().getScore()-100);
-                this.handler.getWorld().getEntityManager().spawnFriendlyBear();
-            }
-        }
-        if(handler.getKeyManager().b){
-            this.handler.getGame().getKeyManager().pressedKeys.add("b");
-        }
-        if(handler.getKeyManager().a){
-            this.handler.getGame().getKeyManager().pressedKeys.add("a");
-        }
-        
-            
-        
-        
     }
     
     @Override
@@ -91,41 +75,15 @@ public class Player extends Creature{
             System.out.println("GAME OVER");
             getCurrentHighscores();
             EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore());
-            System.out.println("asd");
             tmp = null;
-
             handler.getGame().closeGame();
-            
-            
         }
-        
     }
     
     public  void lowerHP(){
         this.health--;
-        if(this.health > 0){
-            System.out.println(health + " lives remaining");
-        }
-    }
-    
-    public void checkKeyManager(){
-        ArrayList <String> temp = this.handler.getGame().getKeyManager().pressedKeys;
-        String lastPressed = "";
-        for(int i=0;i<temp.size();i++){
-            lastPressed +=temp.get(i);
-        }
-        if(lastPressed.contains("uuddlrlrba")){
-            this.isCheating = true;
-            
-        }
+        handler.getGame().getMenu().lowerLives();
+        System.out.println(health + " lives remaining");
         
-        if(lastPressed.length() > 20){
-            for(int i=0;i<10;i++){
-                this.handler.getGame().getKeyManager().pressedKeys.remove(i);
-            }
-        }
     }
-    
-    
-    
 }

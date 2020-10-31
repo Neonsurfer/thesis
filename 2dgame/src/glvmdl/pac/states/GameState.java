@@ -15,6 +15,7 @@ public class GameState extends State{
     public GameState(Handler handler, int worldId){
         super(handler);
         world = new World(handler, "res/worlds/world" + worldId + ".txt");
+        System.out.println("worldid: " + worldId);
         handler.setWorld(world);
   
     }

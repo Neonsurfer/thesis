@@ -32,7 +32,7 @@ public class World {
         
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        entityManager.getPlayer().setHealth(3);
+        entityManager.getPlayer().setHealth(handler.getGame().getMenu().getLives());
     }
     
     public void tick(){

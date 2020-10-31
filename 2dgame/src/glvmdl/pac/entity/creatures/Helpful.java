@@ -37,10 +37,11 @@ public class Helpful extends Creature{
 //        }
         
         
-        Node next = this.path.get(0);
+        if(this.path.size()>0){
+            Node next = this.path.get(0);
         if(next.getRow() < this.y/Tile.TILEHEIGHT){
             yMove = -speed*0.8f;
-            //System.out.println("FEL");
+                //System.out.println("FEL");
         } 
         if(next.getRow() > this.y/Tile.TILEHEIGHT){
             yMove = speed*0.8f;
@@ -55,6 +56,8 @@ public class Helpful extends Creature{
             //System.out.println("JOBB");
         }        
         move();
+        }       
+      
     }
     
     private List getInput(){

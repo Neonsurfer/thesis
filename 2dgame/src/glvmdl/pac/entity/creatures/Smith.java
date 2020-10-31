@@ -38,8 +38,8 @@ public class Smith extends Creature{
         this.path = getInput();
 //        }
         
-        
-        Node next = this.path.get(0);
+        if(this.path.size()>0){
+            Node next = this.path.get(0);
         if(next.getRow() < this.y/Tile.TILEHEIGHT){
             yMove = -speed*0.8f;
                 //System.out.println("FEL");
@@ -57,6 +57,8 @@ public class Smith extends Creature{
             //System.out.println("JOBB");
         }        
         move();
+        }
+        
     }
     
     private List getInput(){

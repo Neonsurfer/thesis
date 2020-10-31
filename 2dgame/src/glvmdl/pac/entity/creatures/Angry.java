@@ -33,7 +33,8 @@ public class Angry extends Creature{
 //        }
         
         
-        Node next = this.path.get(0);
+        if(this.path.size()>0){
+            Node next = this.path.get(0);
         if(next.getRow() < this.y/Tile.TILEHEIGHT){
             yMove = -speed*0.8f;
                 //System.out.println("FEL");
@@ -50,6 +51,8 @@ public class Angry extends Creature{
             xMove = speed*0.8f;
             //System.out.println("JOBB");
         }        
+        
+        } 
         move();
     }
     

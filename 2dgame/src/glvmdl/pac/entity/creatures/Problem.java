@@ -37,28 +37,26 @@ public class Problem extends Creature{
 //        }
         
         
-        Node next = this.path.get(0);
+        if(this.path.size()>0){
+            Node next = this.path.get(0);
         if(next.getRow() < this.y/Tile.TILEHEIGHT){
             yMove = -speed*0.8f;
-            
-            //System.out.println("FEL");
+                //System.out.println("FEL");
         } 
         if(next.getRow() > this.y/Tile.TILEHEIGHT){
             yMove = speed*0.8f;
-            
             //System.out.println("LE");
         }
         if(next.getCol() < (int)x/Tile.TILEWIDTH) {
             xMove = -speed*0.8f;
-            
             //System.out.println("BAL");
         }  
         if(next.getCol() > (int)x/Tile.TILEWIDTH){
             xMove = speed*0.8f;
-            
             //System.out.println("JOBB");
         }        
         move();
+        }
     }
     
     private List getInput(){

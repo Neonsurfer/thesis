@@ -22,8 +22,8 @@ public class FriendBear extends Creature{
     public FriendBear(Handler handler, float x, float y){
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
         
-        bounds.x = 5;
-        bounds.y = 5;
+        bounds.x = 0;
+        bounds.y = 0;
         bounds.width = 30;
         bounds.height = 30;
     }
