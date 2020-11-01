@@ -20,8 +20,8 @@ public class Angry extends Creature{
         
         bounds.x = 5;
         bounds.y = 5;
-        bounds.width = 30;
-        bounds.height = 30;
+        bounds.width = 20;
+        bounds.height = 20;
         
     }
     

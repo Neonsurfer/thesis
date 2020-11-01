@@ -100,19 +100,19 @@ public abstract class Entity {
     }
     
     private void resetBots(){
-        this.handler.getWorld().getEntityManager().getAngry().x=450;
-        this.handler.getWorld().getEntityManager().getAngry().y=600;
-        this.handler.getWorld().getEntityManager().getHelpful().x=450;
-        this.handler.getWorld().getEntityManager().getHelpful().y=550;
-        this.handler.getWorld().getEntityManager().getProblem().x=650;
-        this.handler.getWorld().getEntityManager().getProblem().y=550;
-        this.handler.getWorld().getEntityManager().getSmith().x=650;
-        this.handler.getWorld().getEntityManager().getSmith().y=600;
+        this.handler.getWorld().getEntityManager().getAngry().x=handler.getWorld().angrySpawn[0]*40;
+        this.handler.getWorld().getEntityManager().getAngry().y=handler.getWorld().angrySpawn[1]*40;
+        this.handler.getWorld().getEntityManager().getHelpful().x=handler.getWorld().helpfulSpawn[0]*40;
+        this.handler.getWorld().getEntityManager().getHelpful().y=handler.getWorld().helpfulSpawn[1]*40;
+        this.handler.getWorld().getEntityManager().getProblem().x=handler.getWorld().problemSpawn[0]*40;
+        this.handler.getWorld().getEntityManager().getProblem().y=handler.getWorld().problemSpawn[1]*40;
+        this.handler.getWorld().getEntityManager().getSmith().x=handler.getWorld().smithSpawn[0]*40;
+        this.handler.getWorld().getEntityManager().getSmith().y=handler.getWorld().smithSpawn[1]*40;
     }
     
     private void resetPlayer(){
-        this.handler.getWorld().getEntityManager().getPlayer().x=51;
-        this.handler.getWorld().getEntityManager().getPlayer().y=51;
+        this.handler.getWorld().getEntityManager().getPlayer().x=45;
+        this.handler.getWorld().getEntityManager().getPlayer().y=45;
     }
     
     public Rectangle getCollisionBounds(float xOffset, float yOffset){

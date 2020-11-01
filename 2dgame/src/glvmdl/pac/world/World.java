@@ -15,20 +15,29 @@ import java.awt.Graphics;
 import glvmdl.pac.entity.creatures.Node;
 public class World {
 
-    private Handler handler;
+    private final Handler handler;
     private int width, height;
     private int spawnX, spawnY;
     private int [][] tiles;
-    private EntityManager entityManager;
-    private static int appleCounter = 100;
-    
+    private final EntityManager entityManager;
+    public final int [] angrySpawn;
+    public final int [] helpfulSpawn;
+    public final int [] problemSpawn;
+    public final int [] smithSpawn;
     
     public World(Handler handler, String path){
         this.handler = handler; // tweak spawn finder for everyone
-        entityManager = new EntityManager(handler, new Player(handler, 50, 50), new Angry(handler, 450, 600 ),
-                new Helpful(handler, 450, 550), new Problem(handler, 650,550), new Smith(handler, 650, 600),
-                new FriendBear(handler, 50, 50));
         loadWorld(path);
+        
+        angrySpawn = findSpawnPoint();
+        helpfulSpawn = findSpawnPoint();
+        problemSpawn = findSpawnPoint();
+        smithSpawn = findSpawnPoint();
+        
+        entityManager = new EntityManager(handler, new Player(handler, 45, 45), new Angry(handler, angrySpawn[0]*40, angrySpawn[1]*40 ),
+                new Helpful(handler, helpfulSpawn[0]*40, helpfulSpawn[1]*40), new Problem(handler, problemSpawn[0]*40,problemSpawn[1]*40), 
+                new Smith(handler, smithSpawn[0]*40, smithSpawn[1]*40), new FriendBear(handler, 45, 45));
+        
         
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
@@ -96,6 +105,36 @@ public class World {
         return returnable;
     }
     
+    public int[] findSpawnPoint(){
+        int [] spawn = new int[2];
+        boolean found = false;
+        int tries = 0;
+        for(int i=0;i<width; i++){
+            for(int j=0;j<height; j++){
+                if(tiles[i][j] == 0 && !found){
+                    if(tries < 4){
+                        if((int) (Math.random() * 3 + 1) == 3){
+                            spawn[0] = i;
+                            spawn[1] = j;
+                            found = true;
+                            
+                        }
+                        else{
+                            tries++;
+                        }
+                    }
+                    else{
+                        spawn[0] = i;
+                        spawn[1] = j;
+                        found = true;
+                    }
+                }
+            }
+        }
+        System.out.println(spawn[0] + " " + spawn[1]);
+        return spawn;
+    }
+    
     public int getWidth(){
         return width;
     }
@@ -122,10 +161,6 @@ public class World {
             }
         }
         return appleCount;
-    }
-    
-    public int getAppleCount(){
-        return this.appleCounter;
     }
     
     public void killEntities(){
