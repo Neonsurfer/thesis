@@ -86,8 +86,7 @@ public class EntityManager {
     public static void addEntity(Entity e){
         entities.add(e);
     }
-    //GETTERS SETTERS
-
+    
     public Handler getHandler() {
         return handler;
     }
@@ -128,6 +127,4 @@ public class EntityManager {
     public void killAll(){
         entities.clear();
     }
-    
-    
 }

@@ -1,6 +1,5 @@
 package glvmdl.pac.gfx;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
 import glvmdl.pac.entity.Entity;
 import glvmdl.tiles.Tile;
@@ -27,7 +26,6 @@ public class GameCamera {
         }else if(yOffset > handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight()){
             yOffset = handler.getWorld().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
         }
-        
     }
     
     public void move(float xAmt, float yAmt){
@@ -57,6 +55,4 @@ public class GameCamera {
     public void setyOffset(float yOffset) {
         this.yOffset = yOffset;
     }
-    
-    
 }

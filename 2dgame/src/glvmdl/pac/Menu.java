@@ -1,33 +1,23 @@
 package glvmdl.pac;
 
-
 import glvmdl.pac.highscore.DisplayHighscore;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 import javax.swing.*;
-/**
- *
- * @author mvass
- */
 public class Menu {
-    private JFrame frame;
-    private Canvas canvas;
-    
+
     private static int worldId;
     private static int lives;
     private static int score;
     private static boolean savedGame;
     
-    private JButton button1; // Új játék
-    private JButton button2; // Top lista
-    private JButton button3; // Játék folytatása
-    private JButton button4; // Kilépés
-
-    
+    private final JButton button1; // Új játék
+    private final JButton button2; // Top lista
+    private final JButton button3; // Játék folytatása
+    private final JButton button4; // Kilépés
     
     public Menu() {
         worldId = 1;
@@ -51,24 +41,27 @@ public class Menu {
         this.button2 = new JButton("Highscores");
         button2.addActionListener((ActionEvent e) ->{
             DisplayHighscore disp = new DisplayHighscore();
-            
         });
+        button2.setBounds(100,150,100,30);
         
         this.button3 = new JButton("Continue");
         button3.addActionListener((ActionEvent e) ->{
             if(savedGame){
                 getSavedDetails();
             }
-             
             Game game = new Game(this,"Yogi-bear Game!",800,800);
             game.start();
         });
+        button3.setBounds(100,200,100,30);
+        
         
         this.button4 = new JButton("Exit game");
         button4.addActionListener((ActionEvent e) ->{
             saveDetails();
             System.exit(0);
         });
+        button4.setBounds(100,250,100,30);
+        
         frame.setLayout(new FlowLayout());
         frame.add(button1);
         frame.add(button3);
@@ -77,7 +70,7 @@ public class Menu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setSize(100,200);
+        frame.setSize(100,160);
         frame.setVisible(true);
         
     }
@@ -100,6 +93,7 @@ public class Menu {
     
     public void lowerLives(){
         lives--;
+        
     }
     
     public void resetLives(){
@@ -132,8 +126,6 @@ public class Menu {
                 worldId = Integer.parseInt(pieces[0]);
                 lives = Integer.parseInt(pieces[1]);
                 score = Integer.parseInt(pieces[2]);
-                
-                
             }
         }catch(IOException e){
             System.out.println("Error with last visited world file");
@@ -144,8 +136,7 @@ public class Menu {
         try{
             RandomAccessFile input = new RandomAccessFile("res/worlds/last.txt","rw");
 
-            input.writeBytes(""+worldId+";"+lives+";"+score);
-            System.out.println("kiirva");
+            input.writeBytes("" + worldId + ";" + lives + ";"+score);
         }catch(IOException e){
             System.out.println("Error with last visited world file");
         }

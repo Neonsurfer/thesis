@@ -1,14 +1,8 @@
-
 package glvmdl.pac.entity.creatures;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
-import glvmdl.pac.display.Display;
 import glvmdl.pac.gfx.Assets;
-import java.awt.Color;
 import java.awt.Graphics;
-import glvmdl.pac.entity.creatures.Astar;
-import glvmdl.pac.entity.creatures.Node;
 import glvmdl.tiles.Tile;
 import java.util.*;
 
@@ -18,55 +12,44 @@ public class Angry extends Creature{
     public Angry(Handler handler, float x, float y){
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
         
-        bounds.x = 5;
-        bounds.y = 5;
+        bounds.x = 0;
+        bounds.y = 0;
         bounds.width = 20;
         bounds.height = 20;
-        
     }
     
     @Override
     public void tick(){
-        
-//        if(this.waitforit == 60){
-        this.path = getInput();
-//        }
-        
-        
-        if(this.path.size()>0){
-            Node next = this.path.get(0);
-        if(next.getRow() < this.y/Tile.TILEHEIGHT){
-            yMove = -speed*0.8f;
-                //System.out.println("FEL");
-        } 
-        if(next.getRow() > this.y/Tile.TILEHEIGHT){
-            yMove = speed*0.8f;
-            //System.out.println("LE");
-        }
-        if(next.getCol() < (int)x/Tile.TILEWIDTH) {
-            xMove = -speed*0.8f;
-            //System.out.println("BAL");
-        }  
-        if(next.getCol() > (int)x/Tile.TILEWIDTH){
-            xMove = speed*0.8f;
-            //System.out.println("JOBB");
-        }        
-        
+        path = getInput();
+        if(path.size() > 0){
+            Node next = path.get(0);
+            if(next.getRow() < this.y / Tile.TILEHEIGHT){
+                yMove = -speed*0.8f;
+            } 
+            if(next.getRow() > this.y / Tile.TILEHEIGHT){
+                yMove = speed*0.8f;
+            }
+            if(next.getCol() < (int)x / Tile.TILEWIDTH) {
+                xMove = -speed*0.8f;
+            }  
+            if(next.getCol() > (int)x / Tile.TILEWIDTH){
+                xMove = speed*0.8f;
+            }        
         } 
         move();
     }
     
     private List getInput(){
         Node [][] world = handler.getWorld().nodificateMap();
-        Astar astar = new Astar(world.length, world.length, world[(int)(y/Tile.TILEWIDTH) ][(int)(x/Tile.TILEHEIGHT) ],world[(int)(handler.getWorld().getEntityManager().getPlayer().getY()/Tile.TILEWIDTH) ][(int)(handler.getWorld().getEntityManager().getPlayer().getX()/Tile.TILEHEIGHT) ]/**/);
+        Astar astar = new Astar(world.length, world.length,  //rows and cols
+                world[(int)(y / Tile.TILEWIDTH) ][(int)(x / Tile.TILEHEIGHT) ],//initial
+                world[(int)(handler.getWorld().getEntityManager().getPlayer().getY() / Tile.TILEWIDTH)] //final x
+                        [(int)(handler.getWorld().getEntityManager().getPlayer().getX() / Tile.TILEHEIGHT)]); //final y
         astar.setNodeValues(handler.getWorld().getWorld());
         List<Node> nodes = astar.findPath();
-        
-        if(nodes.size()>1){
+        if(nodes.size() > 1){
             nodes.remove(0);
         }
-        
-       
         return nodes;
     }
     

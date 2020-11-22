@@ -12,7 +12,7 @@ import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
     /*
-    legyen 10 pálya
+    legyen 10 pálya -- 4 done, finished
     gépi játékos velünk/ellenünk -- done
     coop mód -- coop - done
     több játékosban akkor 2 játékos is játszhat akár -- done
@@ -21,12 +21,11 @@ public class Game implements Runnable {
     szétrombolhatja a segítő eszközöket vagy ügyes és jobb mint mi
     sövény amit át lehet törni(vagy adott almaszám felett)
     lehet így következő pályára menni
-    többpálya esetén mentés, betöltés
-    egyéb eszközök esetleg, amik több pontot adnak
+    többpálya esetén mentés, betöltés -- done
     */
     private Display display;
     public String title;
-    private int width, height;
+    private final int width, height;
     
     private boolean running = false;
     private Thread thread;
@@ -43,16 +42,13 @@ public class Game implements Runnable {
     public Menu menu;
     
     //Input
-    private KeyManager keyManager;
+    private final KeyManager keyManager;
     
     //Camera
     private GameCamera gameCamera;
     
     //Handler
     private Handler handler;
-    
-
-    
 
     public Game(Menu menu, String title, int width, int height){
         this.width = width;
@@ -63,18 +59,16 @@ public class Game implements Runnable {
     }
     
     private void init(){
-        display = new Display(title, width, height);
+        display = new Display(title, width, height, menu.getWorldId(), menu.getLives());
         display.getFrame().addKeyListener(keyManager);
         Assets.init();
         
         handler = new Handler(this);
         gameCamera = new GameCamera(handler,0,0);
         
-        
         gameState = new GameState(handler, menu.getWorldId());
-        leaderboardState = new LeaderboardState(handler); //TODO
+        leaderboardState = new LeaderboardState(handler);
         State.setState(gameState);
-        
     } 
     
     private void tick(){
@@ -92,15 +86,12 @@ public class Game implements Runnable {
             return;
         }
         g = bs.getDrawGraphics();
-        // Clear Screen
         g.clearRect(0, 0, width, height);
-        //Draw Here!
         
         if(State.getState() != null){
             State.getState().render(g);
         }
         
-        //End Drawing!
         bs.show();
         g.dispose();
     }
@@ -121,7 +112,7 @@ public class Game implements Runnable {
             timer += now - lastTime;
             lastTime = now;
             
-            if(delta >=1){
+            if(delta >= 1){
                 tick();
                 render();
                 delta--;
@@ -157,6 +148,9 @@ public class Game implements Runnable {
     
     public void increaseScore(){
         menu.increaseScore();
+        String [] textPieces = display.getLabelText().split(" ");
+        textPieces[2] = "Points:" + menu.getScore();
+        display.setLabelText(textPieces[0] + " " +textPieces[1] + " " + textPieces[2]);
     }
     
     public int getScore(){
@@ -175,7 +169,6 @@ public class Game implements Runnable {
         return this.menu;
     }
     
-    
     public synchronized void start(){
         if(running)
             return;
@@ -188,7 +181,6 @@ public class Game implements Runnable {
         if(!running)
             return;
         running = false;
-        System.out.println(menu.getScore());
         System.exit(0);
     }
     

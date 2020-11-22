@@ -1,12 +1,10 @@
 package glvmdl.pac.entity.creatures;
 
-
 import glvmdl.pac.Handler;
 import glvmdl.pac.gfx.Assets;
 import glvmdl.pac.highscore.EndgamePanel;
 import static glvmdl.pac.highscore.Highscore.getCurrentHighscores;
 import java.awt.Graphics;
-import java.util.*;
 
 public class Player extends Creature{
 
@@ -18,27 +16,23 @@ public class Player extends Creature{
         
         bounds.x = 0;
         bounds.y = 0;
-        bounds.width = 30;
-        bounds.height = 30;
+        bounds.width = 25;
+        bounds.height = 25;
         this.health = handler.getGame().getMenu().getLives();
-        //TWEAK THIS
     }
     
     @Override
     public void tick(){
         getInput();
         move();
-        handler.getGameCamera().centerOnEntity(this); //CAMERA CENTER
+        handler.getGameCamera().centerOnEntity(this);
 
         checkHP();
-        
     }
     
     private void getInput(){
         xMove = 0;
         yMove = 0;
-        
-            
         
         if(handler.getKeyManager().up){
             yMove = -speed;
@@ -66,13 +60,12 @@ public class Player extends Creature{
     @Override
     public void render(Graphics g){
         g.drawImage(Assets.player, (int)(x - handler.getGameCamera().getxOffset()), (int)(y - handler.getGameCamera().getyOffset()), width, height, null);
-        g.drawRect((int)(x - handler.getGameCamera().getxOffset()),(int)(y - handler.getGameCamera().getyOffset()),bounds.width,bounds.height);
+        //g.drawRect((int)(x - handler.getGameCamera().getxOffset()),(int)(y - handler.getGameCamera().getyOffset()),bounds.width,bounds.height);
     }
     
     private void checkHP(){
-        if(this.health==0){
+        if(this.health == 0){
             handler.getGame().getMenu().resetWorldId();
-            System.out.println("GAME OVER");
             getCurrentHighscores();
             EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore());
             tmp = null;
@@ -83,7 +76,8 @@ public class Player extends Creature{
     public  void lowerHP(){
         this.health--;
         handler.getGame().getMenu().lowerLives();
-        System.out.println(health + " lives remaining");
-        
+        String [] textPieces = handler.getGame().getDisplay().getLabelText().split(" ");
+        textPieces[1] = " Lives:" + this.health + " ";
+        handler.getGame().getDisplay().setLabelText(textPieces[0] + textPieces[1] + textPieces[2]);
     }
 }

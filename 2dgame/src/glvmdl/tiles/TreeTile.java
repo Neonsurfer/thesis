@@ -12,5 +12,4 @@ public class TreeTile extends Tile{
     public boolean isSolid(){
         return true;
     }
-    
 }

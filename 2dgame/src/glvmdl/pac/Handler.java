@@ -13,7 +13,6 @@ public class Handler {
         this.game = game;
     }
     
-    
     public int getWidth(){
         return game.getWidth();
     }
@@ -29,8 +28,6 @@ public class Handler {
     public GameCamera getGameCamera(){
         return game.getGameCamera();
     }
-    
-    
 
     public Game getGame() {
         return game;
@@ -47,8 +44,4 @@ public class Handler {
     public void setWorld(World world) {
         this.world = world;
     }
-    
-    
-    
-    
 }

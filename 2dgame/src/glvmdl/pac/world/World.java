@@ -1,6 +1,5 @@
 package glvmdl.pac.world;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
 import glvmdl.pac.entity.EntityManager;
 import glvmdl.pac.entity.creatures.Player;
@@ -26,7 +25,7 @@ public class World {
     public final int [] smithSpawn;
     
     public World(Handler handler, String path){
-        this.handler = handler; // tweak spawn finder for everyone
+        this.handler = handler;
         loadWorld(path);
         
         angrySpawn = findSpawnPoint();
@@ -37,7 +36,6 @@ public class World {
         entityManager = new EntityManager(handler, new Player(handler, 45, 45), new Angry(handler, angrySpawn[0]*40, angrySpawn[1]*40 ),
                 new Helpful(handler, helpfulSpawn[0]*40, helpfulSpawn[1]*40), new Problem(handler, problemSpawn[0]*40,problemSpawn[1]*40), 
                 new Smith(handler, smithSpawn[0]*40, smithSpawn[1]*40), new FriendBear(handler, 45, 45));
-        
         
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
@@ -54,14 +52,12 @@ public class World {
         int yStart = (int)Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
         int yEnd = (int) Math.min(width, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
         
-        
         for(int y=yStart;y< yEnd;y++){
             for(int x=xStart;x<xEnd;x++){
-                getTile(x,y).render(g,(int)(x*Tile.TILEWIDTH - handler.getGameCamera().getxOffset()) ,
-                        (int)(y*Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
+                getTile(x,y).render(g,(int)(x*Tile.TILEWIDTH - handler.getGameCamera().getxOffset()),
+                    (int)(y*Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
-        
         entityManager.render(g);
     }
     
@@ -131,7 +127,6 @@ public class World {
                 }
             }
         }
-        System.out.println(spawn[0] + " " + spawn[1]);
         return spawn;
     }
     
@@ -166,6 +161,4 @@ public class World {
     public void killEntities(){
         this.entityManager.setEntities(null);
     }
-    
-    
 }

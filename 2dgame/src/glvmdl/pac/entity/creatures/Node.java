@@ -1,9 +1,5 @@
 package glvmdl.pac.entity.creatures;
 
-/**
- *
- * @author mvass
- */
 public class Node {
     private int g;
     private int f;
@@ -110,8 +106,4 @@ public class Node {
     public void setCol(int col){
         this.col = col;
     }
-
-
 }
-
-

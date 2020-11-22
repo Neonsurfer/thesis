@@ -2,10 +2,6 @@ package glvmdl.pac.entity.creatures;
 
 import java.util.*;
 
-/**
- *
- * @author mvass
- */
 public class Astar {
     
     private int hvCost; //horizontal-vertical cost
@@ -162,7 +158,7 @@ public class Astar {
     }
     
     private boolean isEmpty(PriorityQueue<Node> openList){
-        return openList.size() == 0;
+        return openList.isEmpty();
     }
     
     private static void setBlock(int row, int col){
@@ -220,9 +216,4 @@ public class Astar {
     public boolean getNodeValue(int row, int col){
         return searchArea[row][col].isBlock();
     }
-    
-    
-    
 }
-
-

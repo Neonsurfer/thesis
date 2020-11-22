@@ -1,35 +1,26 @@
 package glvmdl.pac.states;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
-import glvmdl.pac.entity.creatures.Player;
 import glvmdl.pac.world.World;
 import java.awt.Graphics;
 
 public class GameState extends State{
     
-    private World world;
-    
-    
+    private final World world;
     
     public GameState(Handler handler, int worldId){
         super(handler);
         world = new World(handler, "res/worlds/world" + worldId + ".txt");
-        System.out.println("worldid: " + worldId);
         handler.setWorld(world);
-  
     }
 
     @Override
     public void tick(){
         world.tick();
-        
     }
     
     @Override
     public void render(Graphics g){
         world.render(g);
     }
-
-    
 }

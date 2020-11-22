@@ -17,7 +17,6 @@ public class Utils {
             
             br.close();
             
-            
         }catch(IOException e){
             e.printStackTrace();
         }

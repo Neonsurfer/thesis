@@ -1,12 +1,10 @@
 package glvmdl.pac.entity.creatures;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
 import glvmdl.pac.entity.Entity;
 import glvmdl.tiles.Tile;
 
 public abstract class Creature extends Entity{
-    
     
     public static final int DEFAULT_HEALTH = 3;
     public static final float DEFAULT_SPEED = 3.0f;
@@ -85,12 +83,6 @@ public abstract class Creature extends Entity{
         return handler.getWorld().getTile(x, y).isSolid();
     }
     
-    
-    
-    
-    
-    //GETTERS SETTERS
-
     public int getHealth() {
         return health;
     }
@@ -122,5 +114,4 @@ public abstract class Creature extends Entity{
     public void setyMove(float yMove) {
         this.yMove = yMove;
     }
-    
 }

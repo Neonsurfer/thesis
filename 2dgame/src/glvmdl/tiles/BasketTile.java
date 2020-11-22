@@ -2,10 +2,6 @@ package glvmdl.tiles;
 
 import glvmdl.pac.gfx.Assets;
 
-/**
- *
- * @author mvass
- */
 public class BasketTile extends Tile{
     
     public BasketTile(int id) {

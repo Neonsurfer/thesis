@@ -1,7 +1,6 @@
 package glvmdl.pac.gfx;
 
 import java.awt.image.BufferedImage;
-import jdk.nashorn.internal.codegen.CompilerConstants;
 
 public class Assets {
     
@@ -23,7 +22,6 @@ public class Assets {
         smith = sheet.crop(2*width, 2*height, width, height);
         basket = sheet.crop(0, 3*height, width, height);
         friend = sheet.crop(width, 3*height,width, height);
-        
     }
     
     public static void dispose(){
@@ -39,5 +37,4 @@ public class Assets {
         basket = null;
         friend = null;
     }
-    
 }

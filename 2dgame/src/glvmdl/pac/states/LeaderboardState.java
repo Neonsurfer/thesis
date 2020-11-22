@@ -1,6 +1,5 @@
 package glvmdl.pac.states;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
 import java.awt.Graphics;
 

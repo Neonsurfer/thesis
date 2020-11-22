@@ -1,10 +1,7 @@
 package glvmdl.tiles;
 
 import glvmdl.pac.gfx.Assets;
-/**
- *
- * @author mvass
- */
+
 public class AppleTile extends Tile{
      
     public AppleTile(int id) {
@@ -15,5 +12,4 @@ public class AppleTile extends Tile{
     public boolean isSolid(){
         return false;
     }
-    
 }

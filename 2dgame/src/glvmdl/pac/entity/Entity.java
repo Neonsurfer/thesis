@@ -1,10 +1,6 @@
 package glvmdl.pac.entity;
 
-import glvmdl.pac.Game;
-import java.awt.*;
-import glvmdl.pac.display.Display;
 import glvmdl.pac.Handler;
-import glvmdl.pac.gfx.Assets;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import glvmdl.pac.entity.creatures.Player;
@@ -16,7 +12,6 @@ public abstract class Entity {
     protected float x, y;
     protected int width, height;
     protected Rectangle bounds;
-    
     
     public Entity(Handler handler, float x, float y, int width, int height){
         this.handler = handler;
@@ -33,7 +28,6 @@ public abstract class Entity {
     public abstract void render(Graphics g);
     
     public boolean checkEntityCollisions(float xOffset, float yOffset){
-       
         for(Entity e : handler.getWorld().getEntityManager().getEntities()){
             //APPLE
             if(e instanceof Player && e.getCollisionBounds( 0f, 0f).intersects(getCollisionBounds(0f, 0f)) && handler.getWorld().getTile(((int)e.x/40), ((int)e.y/40)).getId() == 3){
@@ -53,16 +47,17 @@ public abstract class Entity {
                     handler.getGame().getMenu().increaseWorldId();
                     handler.getGame().closeGame();
                 }
-                System.out.println(this.handler.getGame().getScore());
                 resetBots();
             }
             //FRIENDLYBEAR
             if(e instanceof FriendBear && e.getCollisionBounds( 0f, 0f).intersects(getCollisionBounds(0f, 0f)) && handler.getWorld().getTile(((int)e.x/40), ((int)e.y/40)).getId() == 3){
                 this.handler.getWorld().setTile((int)(e.x/40), (int)(e.y/40), 0);
                 this.handler.getGame().increaseScore();
-                if(this.alreadyWon())handler.getGame().closeGame();
+                if(this.alreadyWon()){
+                    handler.getGame().getMenu().increaseWorldId();
+                    handler.getGame().closeGame();
+                }
             }
-            
             
             //PLAYER VS ENEMIES
             if(e.equals(this.handler.getWorld().getEntityManager().getPlayer()) && this.handler.getWorld().getEntityManager().getPlayer().isCheating == false){
@@ -88,14 +83,10 @@ public abstract class Entity {
                         resetPlayer();
                     }
                 }
-                
             }
             if(e.equals(this))
                 continue;
-            
         }
-        
-        
         return false;
     }
     
@@ -154,5 +145,4 @@ public abstract class Entity {
     public boolean alreadyWon(){
         return handler.getWorld().countApples() == 0;
     }
-    
 }

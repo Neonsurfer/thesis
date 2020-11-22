@@ -10,8 +10,6 @@ public class KeyManager implements KeyListener{
     public boolean up, down, left, right, escape, ctrl, b, a, w, s, d;
     public ArrayList <String> pressedKeys = new ArrayList<>();
     
-    
-    
     public KeyManager(){
         keys = new boolean[256];
     }
@@ -44,6 +42,4 @@ public class KeyManager implements KeyListener{
     public void keyReleased(KeyEvent e) {
         keys[e.getKeyCode()] = false;
     }
-    
-    
 }

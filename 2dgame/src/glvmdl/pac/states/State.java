@@ -1,6 +1,5 @@
 package glvmdl.pac.states;
 
-import glvmdl.pac.Game;
 import glvmdl.pac.Handler;
 import java.awt.Graphics;
 
@@ -16,8 +15,6 @@ public abstract class State {
         return currentState;
     }
     
-    //CLASS
-    
     protected Handler handler;
     
     public State(Handler handler){
@@ -27,6 +24,4 @@ public abstract class State {
     public abstract void tick();
     
     public abstract void render(Graphics g);
-    
-    
 }

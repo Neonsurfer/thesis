@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +32,13 @@ public class EndgamePanel {
         panelTitle = new JLabel("New Highscore!", JLabel.LEFT);
         panelTitle.setFont(new Font("Serif", Font.BOLD, 22));
         
-        textField = new JTextField("Enter your name");
+        textField = new JTextField("Name");
+        textField.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                textField.setText("");
+            }
+        });
         JButton btn = new JButton("Enter!");
         
         btn.addActionListener((ActionEvent e) -> {
@@ -40,7 +48,6 @@ public class EndgamePanel {
             
         });
         textField.setVisible(true);
-        
         
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);

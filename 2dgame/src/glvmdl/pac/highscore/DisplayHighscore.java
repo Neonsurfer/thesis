@@ -70,7 +70,6 @@ public class DisplayHighscore extends AbstractPanel{
             eraseTable();
         }
         getCurrentHighscores();
-        //System.out.println(highscores.size());
         for(Highscore highscore : highscores){
             Object name = highscore.getName();
             Object score = highscore.getScore();
