@@ -1,9 +1,12 @@
 package glvmdl.pac;
 
 import glvmdl.pac.highscore.DisplayHighscore;
+import glvmdl.pac.world.utils.Utils;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 
 import javax.swing.*;
@@ -118,14 +121,19 @@ public class Menu {
     
     public void getSavedDetails(){
         try{
-            RandomAccessFile input = new RandomAccessFile("res/worlds/last.txt","rw");
-            String line = input.readLine();
-            input.close();
+            StringBuilder builder = new StringBuilder();
+            BufferedReader br = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream("/worlds/last.txt")));
+            String line;
+            while((line = br.readLine()) != null){
+                builder.append(line + "\n");
+            }
+            br.close();
+            line = builder.toString();
             if(line != null){
                 String [] pieces = line.split(";");
-                worldId = Integer.parseInt(pieces[0]);
-                lives = Integer.parseInt(pieces[1]);
-                score = Integer.parseInt(pieces[2]);
+                worldId = Utils.parseInt(pieces[0]);
+                lives = Utils.parseInt(pieces[1]);
+                score = Utils.parseInt(pieces[2]);
             }
         }catch(IOException e){
             System.out.println("Error with last visited world file");

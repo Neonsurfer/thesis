@@ -2,7 +2,7 @@ package glvmdl.pac.entity.creatures;
 
 import glvmdl.pac.Handler;
 import glvmdl.pac.entity.Entity;
-import glvmdl.tiles.Tile;
+import glvmdl.pac.tiles.Tile;
 
 public abstract class Creature extends Entity{
     

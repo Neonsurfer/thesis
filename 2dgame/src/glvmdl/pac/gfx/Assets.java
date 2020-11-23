@@ -1,6 +1,7 @@
 package glvmdl.pac.gfx;
 
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 
 public class Assets {
     
@@ -9,8 +10,10 @@ public class Assets {
     public static BufferedImage player, dirt, tree, apple, rock, angry, helpful, problem, smith, basket, friend;
     
     public static void init(){
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/spritesheet.png"));
         
+        ImageIcon newSheet = new ImageIcon(Assets.class.getClassLoader().getResource("textures/spritesheet.png"));    
+        SpriteSheet sheet = new SpriteSheet(newSheet.getImage());
+
         player = sheet.crop(width, 0, width, height);
         dirt = sheet.crop(2*width, 0, width, height);
         tree = sheet.crop(width, height, width, height);

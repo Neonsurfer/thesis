@@ -8,7 +8,7 @@ import glvmdl.pac.entity.creatures.Helpful;
 import glvmdl.pac.entity.creatures.Problem;
 import glvmdl.pac.entity.creatures.Smith;
 import glvmdl.pac.entity.creatures.FriendBear;
-import glvmdl.tiles.Tile;
+import glvmdl.pac.tiles.Tile;
 import glvmdl.pac.world.utils.Utils;
 import java.awt.Graphics;
 import glvmdl.pac.entity.creatures.Node;

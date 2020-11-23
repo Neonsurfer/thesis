@@ -2,7 +2,7 @@ package glvmdl.pac.gfx;
 
 import glvmdl.pac.Handler;
 import glvmdl.pac.entity.Entity;
-import glvmdl.tiles.Tile;
+import glvmdl.pac.tiles.Tile;
 
 public class GameCamera {
 

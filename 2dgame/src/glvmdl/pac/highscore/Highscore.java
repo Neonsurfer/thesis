@@ -1,6 +1,9 @@
 package glvmdl.pac.highscore;
 
+import glvmdl.pac.world.utils.Utils;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -22,11 +25,14 @@ public class Highscore {
     public static void getCurrentHighscores(){
         if(highscores.isEmpty()){
             try{
-                RandomAccessFile input = new RandomAccessFile("highscores.txt", "rw");
-                for(String line = input.readLine(); line != null; line = input.readLine()){
+                BufferedReader br = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream("/highscores/highscores.txt")));
+                String line;
+                while((line = br.readLine()).length() > 2){
                     addNewHighScore(line);
                 }
-                input.close();
+                br.close();
+                //------------------------------
+                
             }catch(IOException e){
                 System.out.println("Highscore file not found!");
             }
@@ -36,7 +42,7 @@ public class Highscore {
     
     public static void addNewHighScore(String line){
         String [] pieces = line.split(";");
-        highscores.add(new Highscore(pieces[0], Integer.parseInt(pieces[1]),  LocalDate.parse(pieces[2])));
+        highscores.add(new Highscore(pieces[0], Utils.parseInt(pieces[1]),  LocalDate.parse(pieces[2])));
     }
     
     public static void checkCurrentScore(int score, String name){
@@ -70,7 +76,7 @@ public class Highscore {
     
     public static void saveHighScores(){
         try{
-            RandomAccessFile input = new RandomAccessFile("highscores.txt", "rw");
+            RandomAccessFile input = new RandomAccessFile("highscore/highscores.txt", "rw");
             input.seek(0);
             for(Highscore h : highscores){
                 input.writeBytes(h.toString() + "\r\n");

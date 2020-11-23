@@ -3,7 +3,7 @@ package glvmdl.pac.entity.creatures;
 import glvmdl.pac.Handler;
 import glvmdl.pac.gfx.Assets;
 import java.awt.Graphics;
-import glvmdl.tiles.Tile;
+import glvmdl.pac.tiles.Tile;
 import java.util.*;
 
 public class Smith extends Creature{
