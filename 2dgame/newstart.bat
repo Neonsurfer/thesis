@@ -1,2 +1,1 @@
-java -jar -cp dist/2dgame.jar
-pause
+java -jar dist/2dgame.jar

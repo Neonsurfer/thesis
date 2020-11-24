@@ -142,7 +142,7 @@ public class Menu {
     
     public void saveDetails(){
         try{
-            RandomAccessFile input = new RandomAccessFile("res/worlds/last.txt","rw");
+            RandomAccessFile input = new RandomAccessFile("worlds/last.txt","rw");
 
             input.writeBytes("" + worldId + ";" + lives + ";"+score);
         }catch(IOException e){

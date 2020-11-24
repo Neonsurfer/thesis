@@ -76,7 +76,7 @@ public class Highscore {
     
     public static void saveHighScores(){
         try{
-            RandomAccessFile input = new RandomAccessFile("highscore/highscores.txt", "rw");
+            RandomAccessFile input = new RandomAccessFile("highscores/highscoress.txt", "rw");
             input.seek(0);
             for(Highscore h : highscores){
                 input.writeBytes(h.toString() + "\r\n");
