@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/Menu.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/gfx/ImageLoader.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/Highscore.java</file>
-            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/world/World.java</file>
-            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/states/GameState.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/DisplayHighscore.java</file>
             <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/world/utils/Utils.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/entity/creatures/Player.java</file>
+            <file>file:/D:/szakdoga/2dgame/src/glvmdl/pac/highscore/EndgamePanel.java</file>
         </group>
     </open-files>
 </project-private>

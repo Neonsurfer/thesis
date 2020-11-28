@@ -4,10 +4,16 @@ import glvmdl.pac.highscore.DisplayHighscore;
 import glvmdl.pac.world.utils.Utils;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.imageio.ImageIO;
 
 import javax.swing.*;
 public class Menu {
@@ -16,6 +22,7 @@ public class Menu {
     private static int lives;
     private static int score;
     private static boolean savedGame;
+    private BufferedImage background;
     
     private final JButton button1; // Új játék
     private final JButton button2; // Top lista
@@ -29,6 +36,11 @@ public class Menu {
         savedGame = true;
         
         JFrame frame = new JFrame("Menu");
+        try{
+            background = ImageIO.read(Menu.class.getClassLoader().getResource("textures/background.jpg"));
+        }catch(IOException backgroundErr){
+            System.out.println("background Error");
+        }
         
         this.button1 = new JButton("New Game");
         button1.addActionListener((ActionEvent e) -> {
@@ -64,16 +76,17 @@ public class Menu {
             System.exit(0);
         });
         button4.setBounds(100,250,100,30);
-        
+        frame.setContentPane(new ImagePanel(background));
         frame.setLayout(new FlowLayout());
         frame.add(button1);
         frame.add(button3);
         frame.add(button2);
         frame.add(button4);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.setSize(100,160);
+        frame.setSize(400,325);
         frame.setVisible(true);
         
     }
@@ -121,20 +134,39 @@ public class Menu {
     
     public void getSavedDetails(){
         try{
-            StringBuilder builder = new StringBuilder();
-            BufferedReader br = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream("/worlds/last.txt")));
-            String line;
-            while((line = br.readLine()) != null){
-                builder.append(line + "\n");
+            Path path = Paths.get(System.getProperty("user.home"));
+            if(Files.exists(Paths.get(path + "/.pacmangame/last.txt"))){
+                StringBuilder builder = new StringBuilder();
+                BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(System.getProperty("user.home") + "/.pacmangame/last.txt")));
+                
+                String line;
+                while((line = br.readLine()) != null){
+                    builder.append(line + "\n");
+                }
+                br.close();
+                line = builder.toString();
+                if(line != null && line.length() > 0){
+                    String [] pieces = line.split(";");
+                    worldId = Utils.parseInt(pieces[0]);
+                    lives = Utils.parseInt(pieces[1]);
+                    score = Utils.parseInt(pieces[2]);
+                }
             }
-            br.close();
-            line = builder.toString();
-            if(line != null){
-                String [] pieces = line.split(";");
-                worldId = Utils.parseInt(pieces[0]);
-                lives = Utils.parseInt(pieces[1]);
-                score = Utils.parseInt(pieces[2]);
+            else{
+                Files.createDirectory(Paths.get(path + "/.pacmangame"));
+                Files.createFile(Paths.get(path + "/.pacmangame/last.txt"));
+                Files.createFile(Paths.get(path + "/.pacmangame/highscores.txt"));
+                RandomAccessFile in = new RandomAccessFile((System.getProperty("user.home") + "/.pacmangame/last.txt"),"rw");
+                in.writeBytes("1;3;0;");
             }
+            //TODO
+            /*
+            check if .pacmangame exists
+            ifnot create .pacmangame/last.txt 0;0;0
+                  create .pacmanGame/highscores.txt (empty)
+            ifyes beolvas
+            */
+            
         }catch(IOException e){
             System.out.println("Error with last visited world file");
         }
@@ -142,15 +174,25 @@ public class Menu {
     
     public void saveDetails(){
         try{
-            RandomAccessFile input = new RandomAccessFile("worlds/last.txt","rw");
+            String path = (System.getProperty("user.home") + "/.pacmangame/last.txt");
+            RandomAccessFile input = new RandomAccessFile(path,"rw");
 
-            input.writeBytes("" + worldId + ";" + lives + ";"+score);
+            input.writeBytes("" + worldId + ";" + lives + ";"+score+";");
         }catch(IOException e){
             System.out.println("Error with last visited world file");
         }
     }
     
-    
-  
-    
+}
+
+class ImagePanel extends JComponent {
+    private Image image;
+    public ImagePanel(Image image) {
+        this.image = image;
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(image, 0, 0, this);
+    }
 }

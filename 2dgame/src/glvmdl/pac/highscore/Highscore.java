@@ -2,9 +2,13 @@ package glvmdl.pac.highscore;
 
 import glvmdl.pac.world.utils.Utils;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.RandomAccessFile;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,24 +18,36 @@ public class Highscore {
     private String name;
     private int score;
     private LocalDate date;
+    private int worldNum;
     public static List <Highscore> highscores = new ArrayList<>();
     
-    public Highscore(String name, int score, LocalDate date){
+    public Highscore(String name, int score, int worldId, LocalDate date){
         this.name = name;
         this.score = score;
         this.date = date;
+        this.worldNum = worldId;
     }
     
     public static void getCurrentHighscores(){
         if(highscores.isEmpty()){
             try{
-                BufferedReader br = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream("/highscores/highscores.txt")));
-                String line;
-                while((line = br.readLine()).length() > 2){
-                    addNewHighScore(line);
+                Path path = Paths.get(System.getProperty("user.home"));
+                if(Files.exists(Paths.get(path + "/.pacmangame/highscores.txt"))){
+                    BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(System.getProperty("user.home") + "/.pacmangame/highscores.txt")));
+
+                    String line = br.readLine();
+                    while(line != null){
+                        addNewHighScore(line);
+                        line = br.readLine();
+                    }
+                    br.close();
+                    
                 }
-                br.close();
-                //------------------------------
+                else{
+                    Files.createDirectory(Paths.get(path + "/.pacmangame"));
+                    Files.createFile(Paths.get(path + "/.pacmangame/last.txt"));
+                    Files.createFile(Paths.get(path + "/.pacmangame/highscores.txt"));
+                }
                 
             }catch(IOException e){
                 System.out.println("Highscore file not found!");
@@ -42,12 +58,12 @@ public class Highscore {
     
     public static void addNewHighScore(String line){
         String [] pieces = line.split(";");
-        highscores.add(new Highscore(pieces[0], Utils.parseInt(pieces[1]),  LocalDate.parse(pieces[2])));
+        highscores.add(new Highscore(pieces[0], Utils.parseInt(pieces[1]), Utils.parseInt(pieces[2]), LocalDate.parse(pieces[3])));
     }
     
-    public static void checkCurrentScore(int score, String name){
+    public static void checkCurrentScore(int score, String name, int worldNum){
         if(highscores.size() < 11){
-            highscores.add(new Highscore(name, score, LocalDate.now()));
+            highscores.add(new Highscore(name, score, worldNum, LocalDate.now()));
         }else{
             while(highscores.size() > 10){
                 highscores.remove(highscores.size()-1);
@@ -57,7 +73,7 @@ public class Highscore {
         
         if(score > highscores.get(highscores.size()-1).getScore()){
             highscores.remove(highscores.size()-1);
-            highscores.add(new Highscore(name, score, LocalDate.now()));
+            highscores.add(new Highscore(name, score, worldNum, LocalDate.now()));
             sortHighScores();
         }
     }
@@ -66,7 +82,7 @@ public class Highscore {
         for(int i = 0; i < highscores.size() - 1; i++){
             for(int j = 0; j < highscores.size()-i-1; j++){
                 if(highscores.get(j).score < highscores.get(j+1).score){
-                    Highscore tmp = new Highscore(highscores.get(j).name,highscores.get(j).score,highscores.get(j).date);
+                    Highscore tmp = new Highscore(highscores.get(j).name,highscores.get(j).score, highscores.get(j).worldNum, highscores.get(j).date);
                     highscores.remove(j);
                     highscores.add(j+1, tmp);
                 }
@@ -76,7 +92,8 @@ public class Highscore {
     
     public static void saveHighScores(){
         try{
-            RandomAccessFile input = new RandomAccessFile("highscores/highscoress.txt", "rw");
+            String path = (System.getProperty("user.home") + "/.pacmangame/highscores.txt");
+            RandomAccessFile input = new RandomAccessFile(path,"rw");
             input.seek(0);
             for(Highscore h : highscores){
                 input.writeBytes(h.toString() + "\r\n");
@@ -97,9 +114,13 @@ public class Highscore {
     public LocalDate getDate() {
         return date;
     }
+    
+    public int getWorldNum(){
+        return worldNum;
+    }
 
     @Override
     public String toString() {
-        return name + ";" + score + ";" + date;
+        return name + ";" + score + ";" + worldNum + ";" +date + ";";
     }
 }

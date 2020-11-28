@@ -21,11 +21,10 @@ public class EndgamePanel {
     private JLabel panelTitle;
     private JTextField textField;
     private String name;
-    private int score;
     public static boolean isShowing = true;
     
-    public EndgamePanel(int score){
-        this.score = score;
+    public EndgamePanel(int score, int worldNum){
+
         frame = new JFrame(title);
         
         
@@ -42,7 +41,7 @@ public class EndgamePanel {
         JButton btn = new JButton("Enter!");
         
         btn.addActionListener((ActionEvent e) -> {
-            Highscore.checkCurrentScore(score, textField.getText());
+            Highscore.checkCurrentScore(score, textField.getText(), worldNum);
             Highscore.saveHighScores();
             this.frame.dispose();
             

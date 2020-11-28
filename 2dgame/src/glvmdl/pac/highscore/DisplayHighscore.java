@@ -23,7 +23,7 @@ public class DisplayHighscore extends AbstractPanel{
     private JFrame frame;
     private String title;
     private JPanel container;
-    private final String columns [] = {"Name", "Score", "Date"};
+    private final String columns [] = {"Name", "Score","World" ,"Date"};
     private JTable table;
     private JTableHeader tableHeader;
     private static DefaultTableModel tableModel;
@@ -73,9 +73,10 @@ public class DisplayHighscore extends AbstractPanel{
         for(Highscore highscore : highscores){
             Object name = highscore.getName();
             Object score = highscore.getScore();
+            Object worldNum = highscore.getWorldNum();
             Object date = highscore.getDate();
             
-            Object [] data = {name, score, date};
+            Object [] data = {name, score, worldNum, date};
             tableModel.addRow(data);
         }
     }
@@ -99,15 +100,16 @@ public class DisplayHighscore extends AbstractPanel{
         table.setPreferredScrollableViewportSize(new Dimension(600,300));
         table.setFillsViewportHeight(true);
         table.setVisible(true);
-        add(table);
+        
 
         tableHeader = table.getTableHeader();
         tableHeader.setFont(new Font("Serif", Font.BOLD, 12));
         tableHeader.setBackground(Color.DARK_GRAY);
         tableHeader.setForeground(Color.WHITE);
-
+        add(tableHeader);
         tableScroll = new JScrollPane(table);
         tableScroll.setVisible(true);
         add(tableScroll);
+        add(table);
     }
 }

@@ -67,7 +67,7 @@ public class Player extends Creature{
         if(this.health == 0){
             handler.getGame().getMenu().resetWorldId();
             getCurrentHighscores();
-            EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore());
+            EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore(), handler.getGame().getMenu().getWorldId());
             tmp = null;
             handler.getGame().closeGame();
         }
