@@ -41,7 +41,7 @@ public class EndgamePanel {
         JButton btn = new JButton("Enter!");
         
         btn.addActionListener((ActionEvent e) -> {
-            Highscore.checkCurrentScore(score, textField.getText(), worldNum);
+            Highscore.checkCurrentScore(score, textField.getText().replaceAll(";", " "), worldNum);
             Highscore.saveHighScores();
             this.frame.dispose();
             

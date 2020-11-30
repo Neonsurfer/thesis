@@ -64,6 +64,7 @@ public class Menu {
             if(savedGame){
                 getSavedDetails();
             }
+            if(lives == 0)lives = 3;
             Game game = new Game(this,"Yogi-bear Game!",800,800);
             game.start();
         });

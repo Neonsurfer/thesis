@@ -5,12 +5,9 @@ import static glvmdl.pac.highscore.Highscore.highscores;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -19,16 +16,16 @@ import javax.swing.table.JTableHeader;
 
 
 @SuppressWarnings("serial")
-public class DisplayHighscore extends AbstractPanel{
-    private JFrame frame;
-    private String title;
-    private JPanel container;
-    private final String columns [] = {"Name", "Score","World" ,"Date"};
-    private JTable table;
-    private JTableHeader tableHeader;
+public final class DisplayHighscore extends AbstractPanel{
+    private final JFrame frame;
+    private final String title = "Highscores";
+    //private static JPanel container;
+    private static final String columns [] = {"Name", "Score","World" ,"Date"};
+    private static JTable table;
+    private static JTableHeader tableHeader;
     private static DefaultTableModel tableModel;
-    private JScrollPane tableScroll;
-    private JLabel panelTitle;
+    private static JScrollPane tableScroll;
+    //private final JLabel panelTitle;
     
     public DisplayHighscore(){
         frame = new JFrame(title);
@@ -38,22 +35,18 @@ public class DisplayHighscore extends AbstractPanel{
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         
-        setShowPanelProperties();
-        panelTitle = new JLabel("Highscores", JLabel.LEFT);
-        panelTitle.setFont(new Font("Serif", Font.BOLD, 22));
+        tableModel = new DefaultTableModel(columns, 10){
+            @Override
+            public boolean isCellEditable(int rowIndex, int mColIndex){
+                return false;
+            }
+        };
         
-        container = new JPanel();
-        container.setPreferredSize(new Dimension(200, 100));
-        container.add(panelTitle);
-        
-        frame.add(container);
-        
-        tableModel = new DefaultTableModel(columns, 0);
         setTableProperties(tableModel);
+        populateTable(highscores);    
+
+        frame.add(tableScroll);
         
-        populateTable(highscores);
-        table = new JTable(tableModel);
-        frame.add(table);
     }
     
     @Override
@@ -100,16 +93,13 @@ public class DisplayHighscore extends AbstractPanel{
         table.setPreferredScrollableViewportSize(new Dimension(600,300));
         table.setFillsViewportHeight(true);
         table.setVisible(true);
-        
+        table.setColumnSelectionAllowed(false);
+        table.setRowSelectionAllowed(false);
+        table.setFocusable(false);
 
-        tableHeader = table.getTableHeader();
-        tableHeader.setFont(new Font("Serif", Font.BOLD, 12));
-        tableHeader.setBackground(Color.DARK_GRAY);
-        tableHeader.setForeground(Color.WHITE);
-        add(tableHeader);
         tableScroll = new JScrollPane(table);
         tableScroll.setVisible(true);
-        add(tableScroll);
-        add(table);
+        tableScroll.setViewportView(table);
+
     }
 }
