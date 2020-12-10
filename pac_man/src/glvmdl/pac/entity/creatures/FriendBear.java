@@ -9,8 +9,8 @@ import java.util.*;
 
 public class FriendBear extends Creature{
     static List <Node> path = new ArrayList<>();
-    int destinationTileX;
-    int destinationTileY;
+    static int destinationTileX;
+    static int destinationTileY;
 
     private static boolean isControlled = true;
     
@@ -90,14 +90,14 @@ public class FriendBear extends Creature{
                     [(int)(handler.getWorld().getEntityManager().getPlayer().getX()/Tile.TILEHEIGHT)]); //final y
         astar.setNodeValues(handler.getWorld().getWorld());
         
-        if(this.destinationTileX==0 || (this.destinationTileX == (int)(y/Tile.TILEHEIGHT) && this.destinationTileY == (int)(x/Tile.TILEHEIGHT))){
+        if(destinationTileX==0|| (destinationTileX == (int)(y/Tile.TILEHEIGHT) && destinationTileY == (int)(x/Tile.TILEHEIGHT))
+                || (x/Tile.TILEHEIGHT == destinationTileX && y/Tile.TILEHEIGHT == destinationTileY)){
             do{
-                this.destinationTileX = (int)((Math.random()*world.length));
-                this.destinationTileY = (int)((Math.random()*world.length));
-            }while(astar.getSearchArea()[this.destinationTileX][this.destinationTileY].isBlock() || handler.getWorld().getTile(this.destinationTileX, this.destinationTileY).getId() != 3);
+                destinationTileX = (int)((Math.random()*world.length));
+                destinationTileY = (int)((Math.random()*world.length));
+            }while(astar.getSearchArea()[destinationTileX][destinationTileY].isBlock());
         }
-
-        astar.setFinalNode(new Node(this.destinationTileX, this.destinationTileY));
+        astar.setFinalNode(new Node(destinationTileX, destinationTileY));
         
         List<Node> nodes = astar.findPath();
         

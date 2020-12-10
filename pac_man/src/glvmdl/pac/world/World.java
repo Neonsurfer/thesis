@@ -130,6 +130,30 @@ public class World {
         return spawn;
     }
     
+    public int countApples(){
+        int appleCount = 0;
+        for(int i=0;i<tiles.length;i++){
+            for(int j=0;j<tiles.length;j++){
+                if(tiles[i][j] == 3 || tiles[i][j] == 4){
+                    appleCount++;
+                }
+            }
+        }
+        return appleCount;
+    }
+    
+    public void killEntities(){
+        this.entityManager.setEntities(null);
+    }
+    
+    public int getSpawnX(){
+        return spawnX;
+    }
+    
+    public int getSpawnY(){
+        return spawnY;
+    }
+    
     public int getWidth(){
         return width;
     }
@@ -146,19 +170,5 @@ public class World {
         return tiles;
     }
     
-    public int countApples(){
-        int appleCount = 0;
-        for(int i=0;i<tiles.length;i++){
-            for(int j=0;j<tiles.length;j++){
-                if(tiles[i][j] == 3 || tiles[i][j] == 4){
-                    appleCount++;
-                }
-            }
-        }
-        return appleCount;
-    }
     
-    public void killEntities(){
-        this.entityManager.setEntities(null);
-    }
 }

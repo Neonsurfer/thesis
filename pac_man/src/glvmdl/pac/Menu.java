@@ -1,6 +1,7 @@
 package glvmdl.pac;
 
 import glvmdl.pac.highscore.DisplayHighscore;
+import static glvmdl.pac.highscore.Highscore.getCurrentHighscores;
 import glvmdl.pac.world.utils.Utils;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,7 +19,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 public class Menu {
 
-    private static int worldId;
+    private static int worldId = 1;
+    private final static int WORLD_ID_MAX = 5;
     private static int lives;
     private static int score;
     private static boolean savedGame;
@@ -30,10 +32,11 @@ public class Menu {
     private final JButton button4; // Kilépés
     
     public Menu() {
-        worldId = 1;
+        System.out.println(worldId);
         lives = 3;
         score = 0;
         savedGame = true;
+        getCurrentHighscores();
         
         JFrame frame = new JFrame("Menu");
         try{
@@ -48,6 +51,7 @@ public class Menu {
             resetLives();
             resetWorldId();
             savedGame = false;
+            System.out.println(worldId);
             Game game = new Game(this,"Yogi-bear Game!",800,800);
             game.start();
         });
@@ -64,7 +68,12 @@ public class Menu {
             if(savedGame){
                 getSavedDetails();
             }
-            if(lives == 0)lives = 3;
+            if(lives == 0){
+                lives = 3;
+                worldId = 1;
+                score = 0;
+            }
+            System.out.println(worldId);
             Game game = new Game(this,"Yogi-bear Game!",800,800);
             game.start();
         });
@@ -98,6 +107,9 @@ public class Menu {
     
     public void increaseWorldId(){
         worldId++;
+        if( worldId == WORLD_ID_MAX){
+            worldId = 1;
+        }
     }
     
     public void resetWorldId(){
@@ -160,14 +172,7 @@ public class Menu {
                 RandomAccessFile in = new RandomAccessFile((System.getProperty("user.home") + "/.pacmangame/last.txt"),"rw");
                 in.writeBytes("1;3;0;");
             }
-            //TODO
-            /*
-            check if .pacmangame exists
-            ifnot create .pacmangame/last.txt 0;0;0
-                  create .pacmanGame/highscores.txt (empty)
-            ifyes beolvas
-            */
-            
+
         }catch(IOException e){
             System.out.println("Error with last visited world file");
         }
@@ -177,7 +182,7 @@ public class Menu {
         try{
             String path = (System.getProperty("user.home") + "/.pacmangame/last.txt");
             RandomAccessFile input = new RandomAccessFile(path,"rw");
-
+            input.seek(0);
             input.writeBytes("" + worldId + ";" + lives + ";"+score+";");
         }catch(IOException e){
             System.out.println("Error with last visited world file");
@@ -187,7 +192,7 @@ public class Menu {
 }
 
 class ImagePanel extends JComponent {
-    private Image image;
+    private final Image image;
     public ImagePanel(Image image) {
         this.image = image;
     }

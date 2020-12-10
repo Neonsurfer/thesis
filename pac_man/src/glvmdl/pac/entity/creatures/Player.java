@@ -3,14 +3,10 @@ package glvmdl.pac.entity.creatures;
 import glvmdl.pac.Handler;
 import glvmdl.pac.gfx.Assets;
 import glvmdl.pac.highscore.EndgamePanel;
-import static glvmdl.pac.highscore.Highscore.getCurrentHighscores;
 import java.awt.Graphics;
 
 public class Player extends Creature{
 
-    public boolean isCheating = false;
-    
-    
     public Player(Handler handler, float x, float y){
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
         
@@ -66,7 +62,6 @@ public class Player extends Creature{
     private void checkHP(){
         if(this.health == 0){
             handler.getGame().getMenu().resetWorldId();
-            getCurrentHighscores();
             EndgamePanel tmp = new EndgamePanel(handler.getGame().getScore(), handler.getGame().getMenu().getWorldId());
             tmp = null;
             handler.getGame().closeGame();

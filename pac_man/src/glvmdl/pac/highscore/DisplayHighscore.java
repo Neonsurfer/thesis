@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 
 @SuppressWarnings("serial")
@@ -22,7 +21,6 @@ public final class DisplayHighscore extends AbstractPanel{
     //private static JPanel container;
     private static final String columns [] = {"Name", "Score","World" ,"Date"};
     private static JTable table;
-    private static JTableHeader tableHeader;
     private static DefaultTableModel tableModel;
     private static JScrollPane tableScroll;
     //private final JLabel panelTitle;
@@ -62,7 +60,7 @@ public final class DisplayHighscore extends AbstractPanel{
         if(tableModel.getRowCount() != 0){
             eraseTable();
         }
-        getCurrentHighscores();
+
         for(Highscore highscore : highscores){
             Object name = highscore.getName();
             Object score = highscore.getScore();

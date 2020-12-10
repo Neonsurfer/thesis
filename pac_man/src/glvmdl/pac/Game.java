@@ -1,28 +1,16 @@
-package glvmdl.pac;
+    package glvmdl.pac;
 
 import glvmdl.pac.display.Display;
 import glvmdl.pac.gfx.Assets;
 import glvmdl.pac.gfx.GameCamera;
 import glvmdl.pac.input.KeyManager;
 import glvmdl.pac.states.GameState;
-import glvmdl.pac.states.LeaderboardState;
 import glvmdl.pac.states.State;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game implements Runnable {
-    /*
-    legyen 10 pálya -- 4 done, finished
-    gépi játékos velünk/ellenünk -- done
-    coop mód -- coop - done
-    több játékosban akkor 2 játékos is játszhat akár -- done
-    Bubu mint gépi játékos -- done
-    követi maci Lacit -- done
-    szétrombolhatja a segítő eszközöket vagy ügyes és jobb mint mi
-    sövény amit át lehet törni(vagy adott almaszám felett)
-    lehet így következő pályára menni
-    többpálya esetén mentés, betöltés -- done
-    */
+
     private Display display;
     public String title;
     private final int width, height;
@@ -34,20 +22,17 @@ public class Game implements Runnable {
     private Graphics g;
     
     
-    //States
-    
     public State gameState;
     public State menuState;
     public State leaderboardState;
     public Menu menu;
     
-    //Input
+
     private final KeyManager keyManager;
     
-    //Camera
     private GameCamera gameCamera;
     
-    //Handler
+
     private Handler handler;
 
     public Game(Menu menu, String title, int width, int height){
@@ -67,7 +52,6 @@ public class Game implements Runnable {
         gameCamera = new GameCamera(handler,0,0);
         
         gameState = new GameState(handler, menu.getWorldId());
-        leaderboardState = new LeaderboardState(handler);
         State.setState(gameState);
     } 
     
@@ -96,6 +80,7 @@ public class Game implements Runnable {
         g.dispose();
     }
     
+    @Override
     public void run(){
         init();
         
@@ -113,9 +98,11 @@ public class Game implements Runnable {
             lastTime = now;
             
             if(delta >= 1){
+                try{
                 tick();
                 render();
                 delta--;
+                }catch(Exception e){}
             }
             
             if(timer >=1000000000){
@@ -181,10 +168,11 @@ public class Game implements Runnable {
         if(!running)
             return;
         running = false;
-        System.exit(0);
+        //System.exit(0);
     }
     
     public void closeGame(){
+        this.stop();
         handler.getGame().getDisplay().getFrame().setVisible(false);
         handler.getGame().getDisplay().getFrame().dispose();
         handler.getWorld().getEntityManager().killAll();
@@ -192,8 +180,5 @@ public class Game implements Runnable {
         handler.setGame(null);
         State.setState(null);
     }
-    
-    
-    
     
 }

@@ -19,7 +19,7 @@ public class EntityManager {
     private Problem problem;
     private Smith smith;
     private FriendBear friendlyBear;
-    private static ArrayList<Entity> entities= new ArrayList<Entity>();;
+    private static ArrayList<Entity> entities= new ArrayList<Entity>();
     
     public EntityManager(Handler handler, Player player, Angry angry, Helpful helpful, Problem problem, Smith smith, FriendBear friendBear){
         this.handler = handler;
@@ -36,6 +36,28 @@ public class EntityManager {
         addEntity(problem);
         addEntity(smith);
         addEntity(friendBear);
+    }
+    
+    public static void addEntity(Entity e){
+        entities.add(e);
+    }
+
+    
+    public void tick(){
+        for(int i=0;i<entities.size();i++){
+            Entity e = entities.get(i);
+            e.tick();
+        }
+    }
+    
+    public void render(Graphics g){
+        for(Entity e : entities){
+            e.render(g);
+        }
+    }
+    
+    public void killAll(){
+        entities.clear();
     }
 
     public Angry getAngry() {
@@ -70,23 +92,6 @@ public class EntityManager {
         this.smith = smith;
     }
     
-    public void tick(){
-        for(int i=0;i<entities.size();i++){
-            Entity e = entities.get(i);
-            e.tick();
-        }
-    }
-    
-    public void render(Graphics g){
-        for(Entity e : entities){
-            e.render(g);
-        }
-    }
-    
-    public static void addEntity(Entity e){
-        entities.add(e);
-    }
-    
     public Handler getHandler() {
         return handler;
     }
@@ -102,6 +107,14 @@ public class EntityManager {
     public void setPlayer(Player player) {
         this.player = player;
     }
+    
+    public FriendBear getFriendBear(){
+        return this.friendlyBear;
+    }
+    
+    public void setFriendBear(FriendBear friendBear){
+        this.friendlyBear = friendBear;
+    }
 
     public ArrayList<Entity> getEntities() {
         return entities;
@@ -110,21 +123,5 @@ public class EntityManager {
     public void setEntities(ArrayList<Entity> entities) {
         this.entities = entities;
     }
-    
-    public void spawnFriendlyBear(){
-        this.friendlyBear = new FriendBear(this.handler,51,51);
-        entities.add(friendlyBear);
-    }
-    
-    public void deleteFriendlyBear(){
-        for(int i=0;i<entities.size();i++){
-            if(entities.get(i).getX() == this.handler.getWorld().getEntityManager().friendlyBear.x &&entities.get(i).getY() == this.handler.getWorld().getEntityManager().friendlyBear.y){
-                entities.remove(i);
-            }
-        }
-    }
-    
-    public void killAll(){
-        entities.clear();
-    }
+ 
 }

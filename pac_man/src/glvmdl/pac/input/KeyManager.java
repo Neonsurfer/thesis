@@ -6,8 +6,8 @@ import java.util.*;
 
 public class KeyManager implements KeyListener{
     
-    private boolean[] keys;
-    public boolean up, down, left, right, escape, ctrl, b, a, w, s, d;
+    private final boolean[] keys;
+    public boolean up, down, left, right, escape, b, a, w, s, d;
     public ArrayList <String> pressedKeys = new ArrayList<>();
     
     public KeyManager(){
@@ -20,7 +20,6 @@ public class KeyManager implements KeyListener{
         left = keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_RIGHT];
         escape = keys[KeyEvent.VK_ESCAPE];
-        ctrl = keys[KeyEvent.VK_CONTROL];
         b = keys[KeyEvent.VK_B];
         a = keys[KeyEvent.VK_A];
         w = keys[KeyEvent.VK_W];
@@ -29,9 +28,7 @@ public class KeyManager implements KeyListener{
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(KeyEvent e) {

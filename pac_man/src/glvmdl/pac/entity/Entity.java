@@ -27,7 +27,8 @@ public abstract class Entity {
     
     public abstract void render(Graphics g);
     
-    public boolean checkEntityCollisions(float xOffset, float yOffset){
+    public void checkEntityCollisions(float xOffset, float yOffset){
+        
         for(Entity e : handler.getWorld().getEntityManager().getEntities()){
             //APPLE
             if(e instanceof Player && e.getCollisionBounds( 0f, 0f).intersects(getCollisionBounds(0f, 0f)) && handler.getWorld().getTile(((int)e.x/40), ((int)e.y/40)).getId() == 3){
@@ -60,7 +61,7 @@ public abstract class Entity {
             }
             
             //PLAYER VS ENEMIES
-            if(e.equals(this.handler.getWorld().getEntityManager().getPlayer()) && this.handler.getWorld().getEntityManager().getPlayer().isCheating == false){
+            if(e.equals(this.handler.getWorld().getEntityManager().getPlayer())){
                 for(Entity f : handler.getWorld().getEntityManager().getEntities()){
                     if(f.equals(this.handler.getWorld().getEntityManager().getAngry()) && e.getCollisionBounds( xOffset, yOffset).intersects(f.getCollisionBounds(xOffset, yOffset))){
                         this.handler.getWorld().getEntityManager().getPlayer().lowerHP();
@@ -87,7 +88,7 @@ public abstract class Entity {
             if(e.equals(this))
                 continue;
         }
-        return false;
+        //return false;
     }
     
     private void resetBots(){
@@ -102,8 +103,8 @@ public abstract class Entity {
     }
     
     private void resetPlayer(){
-        this.handler.getWorld().getEntityManager().getPlayer().x=45;
-        this.handler.getWorld().getEntityManager().getPlayer().y=45;
+        this.handler.getWorld().getEntityManager().getPlayer().x=this.handler.getWorld().getSpawnX();
+        this.handler.getWorld().getEntityManager().getPlayer().y=this.handler.getWorld().getSpawnY();
     }
     
     public Rectangle getCollisionBounds(float xOffset, float yOffset){
