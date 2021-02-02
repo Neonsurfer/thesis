@@ -62,8 +62,10 @@ public class Highscore {
     }
     
     public static void checkCurrentScore(int score, String name, int worldNum){
+        boolean added = false;
         if(highscores.size() < 11){
             highscores.add(new Highscore(name, score, worldNum, LocalDate.now()));
+            added = true;
         }else{
             while(highscores.size() > 10){
                 highscores.remove(highscores.size()-1);
@@ -71,7 +73,7 @@ public class Highscore {
         }
         sortHighScores();
         
-        if(score > highscores.get(highscores.size()-1).getScore()){
+        if(score > highscores.get(highscores.size()-1).getScore() && !added){
             highscores.remove(highscores.size()-1);
             highscores.add(new Highscore(name, score, worldNum, LocalDate.now()));
             sortHighScores();
@@ -95,6 +97,7 @@ public class Highscore {
             String path = (System.getProperty("user.home") + "/.pacmangame/highscores.txt");
             RandomAccessFile input = new RandomAccessFile(path,"rw");
             input.seek(0);
+            input.setLength(0);
             for(Highscore h : highscores){
                 input.writeBytes(h.toString() + "\r\n");
             }

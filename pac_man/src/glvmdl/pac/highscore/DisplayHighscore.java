@@ -88,7 +88,7 @@ public final class DisplayHighscore extends AbstractPanel{
             }
         });
         
-        table.setPreferredScrollableViewportSize(new Dimension(600,300));
+        table.setPreferredScrollableViewportSize(new Dimension(690,550));
         table.setFillsViewportHeight(true);
         table.setVisible(true);
         table.setColumnSelectionAllowed(false);

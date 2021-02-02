@@ -2,6 +2,7 @@ package glvmdl.pac;
 
 import glvmdl.pac.highscore.DisplayHighscore;
 import static glvmdl.pac.highscore.Highscore.getCurrentHighscores;
+import static glvmdl.pac.highscore.Highscore.saveHighScores;
 import glvmdl.pac.world.utils.Utils;
 import java.awt.*;
 import java.awt.event.*;
@@ -32,7 +33,6 @@ public class Menu {
     private final JButton button4; // Kilépés
     
     public Menu() {
-        System.out.println(worldId);
         lives = 3;
         score = 0;
         savedGame = true;
@@ -83,6 +83,7 @@ public class Menu {
         this.button4 = new JButton("Exit game");
         button4.addActionListener((ActionEvent e) ->{
             saveDetails();
+            saveHighScores();
             System.exit(0);
         });
         button4.setBounds(100,250,100,30);
@@ -182,11 +183,13 @@ public class Menu {
         try{
             String path = (System.getProperty("user.home") + "/.pacmangame/last.txt");
             RandomAccessFile input = new RandomAccessFile(path,"rw");
+            input.setLength(0);
             input.seek(0);
             input.writeBytes("" + worldId + ";" + lives + ";"+score+";");
         }catch(IOException e){
             System.out.println("Error with last visited world file");
         }
+        
     }
     
 }

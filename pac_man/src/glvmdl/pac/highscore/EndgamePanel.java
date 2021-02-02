@@ -38,7 +38,7 @@ public class EndgamePanel {
         
         btn.addActionListener((ActionEvent e) -> {
             Highscore.checkCurrentScore(score, textField.getText().replaceAll(";", " "), worldNum);
-            Highscore.saveHighScores();
+            
             this.frame.dispose();
             
         });
